@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -19,4 +20,6 @@ public class Tipo implements Serializable {
     private Long id;
     private String nome;
     private Double preco;
+    private List<Sessao> secao;
+
 }
