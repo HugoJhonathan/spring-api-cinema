@@ -1,8 +1,6 @@
 package br.com.notnullsistemas.cinema.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -14,15 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "sessoes")
-public class Sessao implements Serializable {
+@Table(name = "salas")
+public class Sala implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Filme filme;
-    private Sala sala;
-    private Date horario;
-    private List<Integer> disponivel;
-    private Double valorTotal;
-
+    private String nome;
+    private Integer capacidade;
 }
