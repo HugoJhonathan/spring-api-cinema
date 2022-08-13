@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -23,5 +24,6 @@ public class Filme implements Serializable {
     private String diretor;
     private String sinopse;
     private String atores;
+    private List<Sessao> secao;
 
 }
