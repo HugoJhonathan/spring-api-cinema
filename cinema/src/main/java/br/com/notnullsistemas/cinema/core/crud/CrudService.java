@@ -31,9 +31,6 @@ public abstract class CrudService<T, ID> {
     public T editar(ID id, T entidade){
         var recuperado = porId(id);
 
-        if(Objects.isNull(recuperado)){
-            throw new RuntimeException("id "+id+" não foi encontrado!");
-        }
         var entidadeSalvar = editarEntidade(recuperado, entidade);
 
         return repository.save(entidadeSalvar);
