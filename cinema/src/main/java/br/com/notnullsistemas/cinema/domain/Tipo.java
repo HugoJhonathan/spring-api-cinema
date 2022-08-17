@@ -20,6 +20,7 @@ public class Tipo implements Serializable {
     private Long id;
     private String nome;
     private Double preco;
-    private List<Sessao> secao;
 
+    @OneToMany
+    private List<Sessao> sessao;
 }

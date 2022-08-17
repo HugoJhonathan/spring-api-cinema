@@ -1,6 +1,7 @@
 package br.com.notnullsistemas.cinema.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -20,4 +21,7 @@ public class Sala implements Serializable {
     private Long id;
     private String nome;
     private Integer capacidade;
+
+    @OneToMany
+    private List<Sessao> sessoes;
 }
