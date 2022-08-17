@@ -2,7 +2,6 @@ package br.com.notnullsistemas.cinema.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -27,7 +26,7 @@ public class Sessao implements Serializable {
     private Tipo tipo;
 
     private Date horario;
-    private List<Integer> disponivel;
+    private Integer disponivel;
     private Double valorTotal;
 
 }
