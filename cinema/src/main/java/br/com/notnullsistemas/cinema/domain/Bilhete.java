@@ -16,7 +16,9 @@ public class Bilhete implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Sessao sessao;
+    @ManyToOne
     private Pessoa pessoa;
     private Boolean meia;
     private Double preco;

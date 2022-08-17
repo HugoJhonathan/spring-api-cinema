@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -18,4 +19,6 @@ public class Pessoa implements Serializable {
     private Long id;
     private String nome;
     private String cpf;
+    @OneToMany(mappedBy = "pessoa")
+    private List<Bilhete> bilhetes;
 }
