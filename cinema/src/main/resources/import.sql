@@ -23,9 +23,9 @@ INSERT INTO `filmes`(`atores`, `diretor`, `duracao`, `generos`, `nome`, `sinopse
 insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:12:00:00", 1, 1, 1);
 insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:16:00:00", 1, 1, 1);
 
-insert into bilhetes (sessao_id, pessoa_id, meia) values (1, 1, true);
-insert into bilhetes (sessao_id, pessoa_id, meia) values (1, 2, false);
-insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 3, true);
-insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 4, false);
-insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 5, true);
-insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 5, false);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (1, 1, true, 1);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (1, 2, false, 2);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 3, true, 4);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 4, false, 9);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 5, true, 10);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 5, false, 11);

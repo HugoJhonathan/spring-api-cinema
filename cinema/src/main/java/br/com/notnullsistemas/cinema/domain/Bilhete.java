@@ -22,4 +22,5 @@ public class Bilhete implements Serializable, CrudDomain<Long> {
     @ManyToOne
     private Pessoa pessoa;
     private Boolean meia;
+    private Integer poltrona;
 }
