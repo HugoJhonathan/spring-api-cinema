@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import br.com.notnullsistemas.cinema.core.crud.CrudDomain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "salas")
-public class Sala implements Serializable {
-
+public class Sala implements Serializable, CrudDomain<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

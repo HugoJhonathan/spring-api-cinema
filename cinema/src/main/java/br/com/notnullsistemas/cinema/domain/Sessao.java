@@ -2,10 +2,10 @@ package br.com.notnullsistemas.cinema.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
+import br.com.notnullsistemas.cinema.core.crud.CrudDomain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "sessoes")
-public class Sessao implements Serializable {
+public class Sessao implements Serializable, CrudDomain<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +27,5 @@ public class Sessao implements Serializable {
     private Tipo tipo;
 
     private Date horario;
-    private List<Integer> disponivel;
-    private Double valorTotal;
 
 }
