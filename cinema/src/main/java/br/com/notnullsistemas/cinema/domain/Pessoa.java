@@ -21,6 +21,8 @@ public class Pessoa implements Serializable, CrudDomain<Long> {
     private Long id;
     private String nome;
     private String cpf;
+
     @OneToMany(mappedBy = "pessoa")
+    @JsonIgnoreProperties("bilhetes")
     private List<Bilhete> bilhetes;
 }
