@@ -1,6 +1,7 @@
 package br.com.notnullsistemas.cinema.domain;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudDomain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,6 @@ public class Tipo implements Serializable, CrudDomain<Long> {
     private Double preco;
 
     @OneToMany(mappedBy = "tipo")
+    @JsonIgnoreProperties("sessao")
     private List<Sessao> sessao;
 }
