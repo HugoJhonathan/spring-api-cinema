@@ -23,6 +23,6 @@ public class Pessoa implements Serializable, CrudDomain<Long> {
     private String cpf;
 
     @OneToMany(mappedBy = "pessoa")
-    @JsonIgnoreProperties("bilhetes")
+    @JsonIgnoreProperties("pessoa")
     private List<Bilhete> bilhetes;
 }

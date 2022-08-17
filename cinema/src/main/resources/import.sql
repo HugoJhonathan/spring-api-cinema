@@ -24,7 +24,7 @@ insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:12
 insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:16:00:00", 1, 1, 1);
 
 insert into bilhetes (sessao_id, pessoa_id, meia) values (1, 1, true);
-insert into bilhetes (sessao_id, pessoa_id, meia) values (1, 2, false);
+insert into bilhetes (sessao_id, pessoa_id, meia) values (1, 1, false);
 insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 3, true);
 insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 4, false);
 insert into bilhetes (sessao_id, pessoa_id, meia) values (2, 5, true);
