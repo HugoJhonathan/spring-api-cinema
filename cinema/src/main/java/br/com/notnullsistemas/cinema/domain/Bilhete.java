@@ -21,12 +21,13 @@ public class Bilhete implements Serializable, CrudDomain<Long> {
     private Long id;
 
     @ManyToOne
+    @JsonIgnoreProperties("bilhetes")
+    private Pessoa pessoa;
+
+    private Boolean meia;
+
+    @ManyToOne
     @JsonIgnoreProperties("sessao")
     private Sessao sessao;
 
-    @ManyToOne
-    @JsonIgnoreProperties("pessoa")
-    private Pessoa pessoa;
-    private Boolean meia;
-    private Integer poltrona;
 }

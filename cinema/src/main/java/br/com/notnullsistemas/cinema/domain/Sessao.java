@@ -24,16 +24,16 @@ public class Sessao implements Serializable, CrudDomain<Long> {
 
     @ManyToOne
     @JsonIgnoreProperties("sessoes")
-    private Filme filme;
+    private Sala sala;
+
+    private Date horario;
 
     @ManyToOne
     @JsonIgnoreProperties("sessoes")
-    private Sala sala;
+    private Filme filme;
 
     @ManyToOne
     @JsonIgnoreProperties("sessao")
     private Tipo tipo;
-
-    private Date horario;
 
 }
