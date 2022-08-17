@@ -19,6 +19,7 @@ public class Sessao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Filme filme;
     private Sala sala;
     private Date horario;

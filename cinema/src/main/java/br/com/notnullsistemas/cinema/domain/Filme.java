@@ -24,6 +24,7 @@ public class Filme implements Serializable {
     private String diretor;
     private String sinopse;
     private String atores;
-    private List<Sessao> secao;
+    @OneToMany(mappedBy = "filme")
+    private List<Sessao> secoes;
 
 }
