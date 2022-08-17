@@ -21,7 +21,11 @@ public class Sessao implements Serializable {
     private Long id;
     @ManyToOne
     private Filme filme;
+    @ManyToOne
     private Sala sala;
+    @ManyToOne
+    private Tipo tipo;
+
     private Date horario;
     private List<Integer> disponivel;
     private Double valorTotal;

@@ -22,6 +22,6 @@ public class Sala implements Serializable {
     private String nome;
     private Integer capacidade;
 
-    @OneToMany
+    @OneToMany(mappedBy = "sala")
     private List<Sessao> sessoes;
 }

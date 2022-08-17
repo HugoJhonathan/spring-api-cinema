@@ -21,6 +21,6 @@ public class Tipo implements Serializable {
     private String nome;
     private Double preco;
 
-    @OneToMany
+    @OneToMany(mappedBy = "tipo")
     private List<Sessao> sessao;
 }
