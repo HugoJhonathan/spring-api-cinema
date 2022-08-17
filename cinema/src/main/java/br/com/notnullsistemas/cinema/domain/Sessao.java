@@ -1,7 +1,9 @@
 package br.com.notnullsistemas.cinema.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -35,5 +37,9 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     @ManyToOne
     @JsonIgnoreProperties("sessao")
     private Tipo tipo;
+
+    @OneToMany(mappedBy = "sessao")
+    @JsonIgnoreProperties("sessao")
+    private List<Bilhete> bilhetes = new ArrayList<>();
 
 }
