@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BilheteRepository extends CrudRepository<Bilhete, Long> {
 
+
+
 }

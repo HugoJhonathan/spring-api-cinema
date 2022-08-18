@@ -27,7 +27,7 @@ public abstract class CrudController<T extends CrudDomain<ID>, ID> {
     public ResponseEntity<T> criar(@RequestBody T entidade){
         ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequest();
         var uri = builder.path("/{id}").buildAndExpand(entidade.getId()).toUri(); // id da entity criada
-        return ResponseEntity.created(uri).body(entidade);
+        return ResponseEntity.created(uri).body(service.criar(entidade));
     }
 
     @PutMapping("/{id}")

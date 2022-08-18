@@ -10,9 +10,11 @@ import javax.persistence.*;
 import br.com.notnullsistemas.cinema.core.crud.CrudDomain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @AllArgsConstructor
@@ -42,4 +44,28 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     @JsonIgnoreProperties("sessao")
     private List<Bilhete> bilhetes = new ArrayList<>();
 
+    @Transient
+    private Double total;
+
+    @Transient
+    private List<Integer> ocupadas = new ArrayList<>();
+
+    public List<Integer> getOcupadas() {
+        for(Bilhete bilhete : bilhetes){
+            ocupadas.add(bilhete.getPoltrona());
+        }
+        return ocupadas;
+    }
+
+    public Double getTotal() {
+        Double total = 0.0;
+        for(Bilhete bilhete : getBilhetes()){
+            if(bilhete.getMeia()){
+                total += getTipo().getPreco()/2;
+            }else{
+                total += getTipo().getPreco();
+            }
+        }
+        return total;
+    }
 }
