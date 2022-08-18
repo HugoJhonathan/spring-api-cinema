@@ -21,7 +21,10 @@ public abstract class CrudService<T, ID> {
     }
 
     public T porId(ID id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("ID: "+id+" não existe")
+                );
     }
 
     public T criar(T entidade){

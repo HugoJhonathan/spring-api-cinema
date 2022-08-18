@@ -32,16 +32,15 @@ public class Bilhete implements Serializable, CrudDomain<Long> {
     @Transient
     private Double total;
 
+    @ManyToOne
+    @JsonIgnoreProperties("bilhetes")
+    private Sessao sessao;
+
     public Double getTotal() {
         if(meia){
             return sessao.getTipo().getPreco()/2;
         }
         return sessao.getTipo().getPreco();
     }
-
-    @ManyToOne
-    @JsonIgnoreProperties("sessao")
-    private Sessao sessao;
-
 
 }

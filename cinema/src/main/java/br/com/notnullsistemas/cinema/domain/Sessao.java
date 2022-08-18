@@ -51,7 +51,7 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     private List<Integer> ocupadas = new ArrayList<>();
 
     public List<Integer> getOcupadas() {
-        for(Bilhete bilhete : bilhetes){
+        for(Bilhete bilhete : getBilhetes()){
             ocupadas.add(bilhete.getPoltrona());
         }
         return ocupadas;

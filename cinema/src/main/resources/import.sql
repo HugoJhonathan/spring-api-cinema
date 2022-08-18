@@ -1,11 +1,11 @@
-INSERT INTO `salas`(`capacidade`, `nome`) VALUES ('50','sala 1')
-INSERT INTO `salas`(`capacidade`, `nome`) VALUES ('50','sala 2')
-INSERT INTO `salas`(`capacidade`, `nome`) VALUES ('40','sala 3')
-INSERT INTO `salas`(`capacidade`, `nome`) VALUES ('40','sala 4')
-INSERT INTO `salas`(`capacidade`, `nome`) VALUES ('20','sala 5')
+INSERT INTO `salas`(`capacidade`, `nome`) VALUES (50,'sala 1')
+INSERT INTO `salas`(`capacidade`, `nome`) VALUES (50,'sala 2')
+INSERT INTO `salas`(`capacidade`, `nome`) VALUES (40,'sala 3')
+INSERT INTO `salas`(`capacidade`, `nome`) VALUES (40,'sala 4')
+INSERT INTO `salas`(`capacidade`, `nome`) VALUES (20,'sala 5')
 
-INSERT INTO `tipos`(`nome`, `preco`) VALUES ('2D','20')
-INSERT INTO `tipos`(`nome`, `preco`) VALUES ('3D','28')
+INSERT INTO `tipos`(`nome`, `preco`) VALUES ('2D',20)
+INSERT INTO `tipos`(`nome`, `preco`) VALUES ('3D',28)
 
 INSERT INTO `pessoas`(`cpf`, `nome`) VALUES ('3280-340','Julia Souza')
 INSERT INTO `pessoas`(`cpf`, `nome`) VALUES ('2830-529','Roberto Firmino')
@@ -28,4 +28,4 @@ insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (1, 2, false,
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 3, true, 4);
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 4, false, 9);
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 5, true, 10);
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 5, false, 11);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 6, false, 11);

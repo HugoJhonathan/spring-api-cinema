@@ -2,6 +2,7 @@ package br.com.notnullsistemas.cinema.service;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
 import br.com.notnullsistemas.cinema.domain.Bilhete;
+import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 
 import java.util.ArrayList;
@@ -16,25 +17,32 @@ public class BilheteService extends CrudService<Bilhete, Long> {
     @Autowired
     private SessaoService sessaoService;
 
+    @Autowired
+    private PessoaService pessoaService;
+
     protected Bilhete editarEntidade(Bilhete recuperado, Bilhete entidade) {
         return null;
     }
 
     @Override
     public Bilhete criar(Bilhete entidade) {
-        Sessao sessao = sessaoService.porId(entidade.getId());
-        List<Integer> cadeirasOcupadas = new ArrayList<>();
+        Sessao sessao = sessaoService.porId(entidade.getSessao().getId());
+
         for (Bilhete bilhete : sessao.getBilhetes()) {
             if (bilhete.getPoltrona() == entidade.getPoltrona()) {
-                // throw new RuntimeException("asdfklj");
+//                throw new RuntimeException("Cadeira "+entidade.getPoltrona()+" já está ocupada");
                 return null;
-            } else {
-                cadeirasOcupadas.add(bilhete.getPoltrona());
             }
         }
+
         System.out.print("\n\n\n\n\n\n-----------------------------salvo mesmo assim-----------------\n\n\n\n\n\n");
 
-        return repository.save(entidade);
+        Pessoa pessoa = pessoaService.porId(entidade.getPessoa().getId());
+        entidade.setSessao(sessao);
+        entidade.setPessoa(pessoa);
+        var saved = repository.save(entidade);
+
+        return repository.findById(saved.getId()).orElse(null);
     }
 
 }
