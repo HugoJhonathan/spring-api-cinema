@@ -48,9 +48,12 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     private Double total;
 
     @Transient
-    private List<Integer> ocupadas = new ArrayList<>();
+    private List<Integer> ocupadas;
 
     public List<Integer> getOcupadas() {
+
+        ocupadas = new ArrayList<>();
+
         for(Bilhete bilhete : getBilhetes()){
             ocupadas.add(bilhete.getPoltrona());
         }

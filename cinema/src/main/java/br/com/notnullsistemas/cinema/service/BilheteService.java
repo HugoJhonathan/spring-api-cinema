@@ -35,12 +35,10 @@ public class BilheteService extends CrudService<Bilhete, Long> {
             }
         }
 
-        System.out.print("\n\n\n\n\n\n-----------------------------salvo mesmo assim-----------------\n\n\n\n\n\n");
-
         Pessoa pessoa = pessoaService.porId(entidade.getPessoa().getId());
         entidade.setSessao(sessao);
         entidade.setPessoa(pessoa);
-        var saved = repository.save(entidade);
+        Bilhete saved = repository.save(entidade);
 
         return repository.findById(saved.getId()).orElse(null);
     }
