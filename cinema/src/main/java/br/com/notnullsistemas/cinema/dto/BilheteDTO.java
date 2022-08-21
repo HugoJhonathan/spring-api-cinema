@@ -1,10 +1,10 @@
 package br.com.notnullsistemas.cinema.dto;
 
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +16,6 @@ public class BilheteDTO implements Serializable {
     private Boolean meia;
     private Double total;
     private PessoaDTO pessoa;
-    private Integer pessoaId;
-    private Integer sessaoId;
+    private Long pessoaId;
+    private Long sessaoId;
 }
