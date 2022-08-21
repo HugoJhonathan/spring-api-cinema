@@ -9,7 +9,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class BilheteDTO implements Serializable {
+public class BilheteMinDTO implements Serializable {
 
     private Long id;
     private Integer poltrona;
@@ -18,6 +18,5 @@ public class BilheteDTO implements Serializable {
     private PessoaDTO pessoa;
     private Long pessoaId;
     private Long sessaoId;
-    private SessaoMinDTO sessao;
 
 }

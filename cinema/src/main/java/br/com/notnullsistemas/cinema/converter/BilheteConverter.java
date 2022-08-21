@@ -5,7 +5,7 @@ import br.com.notnullsistemas.cinema.domain.Bilhete;
 import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.dto.BilheteDTO;
-import br.com.notnullsistemas.cinema.service.PessoaService;
+import br.com.notnullsistemas.cinema.repository.PessoaRepository;
 import br.com.notnullsistemas.cinema.service.SessaoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,9 +14,10 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
 
-    private final PessoaService pessoaService;
+    private final PessoaRepository pessoaRepository;
     private final SessaoService sessaoService;
     private final PessoaConverter pessoaConverter;
+    private final SessaoMinConverter sessaoMinConverter;
 
     @Override
     public BilheteDTO entidadeParaDto(Bilhete entidade) {
@@ -29,13 +30,23 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
         bilhete.setPessoa(pessoaConverter.entidadeParaDto(entidade.getPessoa()));
         bilhete.setPessoaId(entidade.getPessoa().getId());
         bilhete.setSessaoId(entidade.getSessao().getId());
+        bilhete.setSessao(sessaoMinConverter.entidadeParaDto(entidade.getSessao()));
 
         return bilhete;
     }
 
     @Override
     public Bilhete dtoParaEntidade(BilheteDTO dto) {
-        Pessoa pessoa = pessoaService.porId(dto.getPessoaId());
+        Pessoa pessoa = null;
+        if(dto.getPessoaId() != null){
+            pessoa = pessoaRepository.findById(dto.getPessoaId()).orElse(null);
+        }
+        else if(dto.getPessoa().getCpf() != null && dto.getPessoa().getNome() != null){
+            pessoa = pessoaRepository.save(pessoaConverter.dtoParaEntidade(dto.getPessoa()));
+        }else{
+            throw new RuntimeException("Precisa ter NOME e CPF!!!!!!!!!!!!!!");
+        }
+
         Sessao sessao = sessaoService.porId(dto.getSessaoId());
 
         Bilhete bilhete = new Bilhete();

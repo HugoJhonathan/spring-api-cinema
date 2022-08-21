@@ -10,6 +10,8 @@ import br.com.notnullsistemas.cinema.repository.SalaRepository;
 import br.com.notnullsistemas.cinema.repository.TipoRepository;
 import lombok.AllArgsConstructor;
 
+import java.util.stream.Collectors;
+
 @Component
 @AllArgsConstructor
 public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
@@ -17,6 +19,7 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
     private final FilmeConverter filmeConverter;
     private final SalaConverter salaConverter;
     private final TipoConverter tipoConverter;
+    private final BilheteMinConverter bilheteMinConverter;
 
     private final FilmeRepository filmeRepository;
     private final SalaRepository salaRepository;
@@ -31,6 +34,9 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
         dto.setFilme(filmeConverter.entidadeParaDto(entidade.getFilme()));
         dto.setSala(salaConverter.entidadeParaDto(entidade.getSala()));
         dto.setTipo(tipoConverter.entidadeParaDto(entidade.getTipo()));
+        dto.setBilhetes(entidade.getBilhetes()
+                .stream().map(bilheteMinConverter::entidadeParaDto)
+                .collect(Collectors.toList()));
         return dto;
     }
 

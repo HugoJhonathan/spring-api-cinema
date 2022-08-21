@@ -10,4 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/bilhetes")
 public class BilheteController extends CrudController<Bilhete, BilheteDTO, Long> {
 
+
+//    @GetMapping("/test")
+//    public ResponseEntity<Object> test(){
+//
+//        var test = new Object();
+//
+//    }
 }
