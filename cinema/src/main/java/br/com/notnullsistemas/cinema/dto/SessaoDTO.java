@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class SessaoDTO implements Serializable {
     private Long id;
     private Date horario;
+    private Double total;
+    private Long filmeId;
+    private Long salaId;
+    private Long tipoId;
     private SalaDTO sala;
     private FilmeDTO filme;
     private TipoDTO tipo;
-    private Integer filmeId;
-    private Integer salaId;
-    private Integer tipoId;
-    private Double total;
 }
