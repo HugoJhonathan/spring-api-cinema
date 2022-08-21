@@ -22,7 +22,4 @@ public class Tipo implements Serializable, CrudDomain<Long> {
     private String nome;
     private Double preco;
 
-    @OneToMany(mappedBy = "tipo")
-    @JsonIgnoreProperties("sessao")
-    private List<Sessao> sessao;
 }

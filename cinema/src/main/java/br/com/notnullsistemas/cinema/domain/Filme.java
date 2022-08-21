@@ -25,8 +25,5 @@ public class Filme implements Serializable, CrudDomain<Long>{
     private String diretor;
     private String sinopse;
     private String atores;
-    @OneToMany(mappedBy = "filme")
-    @JsonIgnoreProperties("sessoes")
-    private List<Sessao> sessoes;
 
 }

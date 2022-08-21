@@ -23,7 +23,4 @@ public class Sala implements Serializable, CrudDomain<Long> {
     private String nome;
     private Integer capacidade;
 
-    @OneToMany(mappedBy = "sala")
-    @JsonIgnoreProperties("sessoes")
-    private List<Sessao> sessoes;
 }
