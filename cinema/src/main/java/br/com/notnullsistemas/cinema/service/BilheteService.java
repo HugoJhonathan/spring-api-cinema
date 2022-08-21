@@ -27,7 +27,6 @@ public class BilheteService extends CrudService<Bilhete, Long> {
     public Bilhete criar(Bilhete entidade) {
         Sessao sessao = sessaoService.porId(entidade.getSessao().getId());
         Pessoa pessoa = pessoaService.porId(entidade.getPessoa().getId());
-        entidade.setSessao(sessao);
         entidade.setPessoa(pessoa);
 
         if(entidade.getPoltrona() <= 0 || entidade.getPoltrona() > sessao.getSala().getCapacidade()){
@@ -41,9 +40,9 @@ public class BilheteService extends CrudService<Bilhete, Long> {
         }
 
         if(entidade.getMeia()){
-            entidade.setTotal(entidade.getSessao().getTipo().getPreco()/2);
+            entidade.setTotal(sessao.getTipo().getPreco()/2);
         }else{
-            entidade.setTotal(entidade.getSessao().getTipo().getPreco());
+            entidade.setTotal(sessao.getTipo().getPreco());
         }
 
         Bilhete saved = repository.save(entidade);
