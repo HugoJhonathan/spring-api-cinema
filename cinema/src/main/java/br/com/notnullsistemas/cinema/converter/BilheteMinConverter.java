@@ -25,10 +25,11 @@ public class BilheteMinConverter implements CrudConverter<Bilhete, BilheteMinDTO
         bilhete.setPoltrona(entidade.getPoltrona());
         bilhete.setMeia(entidade.getMeia());
         bilhete.setTotal(entidade.getTotal());
+        bilhete.setDataCompra(entidade.getDataCompra());
+        bilhete.setDiaSessao(entidade.getDiaSessao());
         bilhete.setPessoa(pessoaConverter.entidadeParaDto(entidade.getPessoa()));
         bilhete.setPessoaId(entidade.getPessoa().getId());
         bilhete.setSessaoId(entidade.getSessao().getId());
-
 
         return bilhete;
     }

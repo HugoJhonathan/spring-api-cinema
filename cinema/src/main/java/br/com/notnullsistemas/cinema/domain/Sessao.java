@@ -1,6 +1,8 @@
 package br.com.notnullsistemas.cinema.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +32,12 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     @JsonIgnoreProperties("sessoes")
     private Sala sala;
 
-    private Date horario;
+    private LocalTime horario;
+
+    private LocalDate dataInicio;
+    private LocalDate dataFinal;
+
+    private Boolean ativo;
 
     @ManyToOne
     @JsonIgnoreProperties("sessoes")
@@ -54,7 +61,7 @@ public class Sessao implements Serializable, CrudDomain<Long> {
 
         ocupadas = new ArrayList<>();
 
-        for(Bilhete bilhete : getBilhetes()){
+        for (Bilhete bilhete : getBilhetes()) {
             ocupadas.add(bilhete.getPoltrona());
         }
         return ocupadas;
@@ -62,10 +69,10 @@ public class Sessao implements Serializable, CrudDomain<Long> {
 
     public Double getTotal() {
         Double total = 0.0;
-        for(Bilhete bilhete : getBilhetes()){
-            if(bilhete.getMeia()){
-                total += getTipo().getPreco()/2;
-            }else{
+        for (Bilhete bilhete : getBilhetes()) {
+            if (bilhete.getMeia()) {
+                total += getTipo().getPreco() / 2;
+            } else {
                 total += getTipo().getPreco();
             }
         }

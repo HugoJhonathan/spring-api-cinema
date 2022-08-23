@@ -13,28 +13,36 @@ INSERT INTO `pessoas`(`cpf`, `nome`) VALUES ('3802-138','Gabriel Borges')
 INSERT INTO `pessoas`(`cpf`, `nome`) VALUES ('8032-845','Leonardo da Vinci')
 INSERT INTO `pessoas`(`cpf`, `nome`) VALUES ('8023-184','Bruna Marques')
 
-INSERT INTO `filmes`(`atores`, `diretor`, `duracao`, `generos`, `nome`, `sinopse`) VALUES ('Tom Holland, Zendaya, Benedict Cumberbatch','Jon Watts',148,'super-herói','Homem-Aranha: Sem Volta para Casa','O Homem-Aranha precisa lidar com as consequências da sua verdadeira identidade ter sido descoberta.')
+INSERT INTO `filmes`( `nome`, `atores`, `diretor`, `duracao`, `generos`, `sinopse`) VALUES ('Homem-Aranha: Sem Volta para Casa','Tom Holland, Zendaya, Benedict Cumberbatch','Jon Watts',148,'super-herói','O Homem-Aranha precisa lidar com as consequências da sua verdadeira identidade ter sido descoberta.')
 
-INSERT INTO `filmes`(`atores`, `diretor`, `duracao`, `generos`, `nome`, `sinopse`) VALUES ('Timothée Chalamet, Zendaya, Rebecca Ferguson, Oscar Isaac, Josh Brolin','Denis Villeneuve',155,'ficção-científica','Duna','No futuro distante da humanidade, o duque Leto Atreides aceita a administração do perigoso planeta deserto Arrakis, a única fonte da substância mais valiosa do universo.')
+INSERT INTO `filmes`( `nome`, `atores`, `diretor`, `duracao`, `generos`, `sinopse`) VALUES ('Duna','Timothée Chalamet, Zendaya, Rebecca Ferguson, Oscar Isaac, Josh Brolin','Denis Villeneuve',155,'ficção-científica','No futuro distante da humanidade, o duque Leto Atreides aceita a administração do perigoso planeta deserto Arrakis, a única fonte da substância mais valiosa do universo.')
 
-INSERT INTO `filmes`(`atores`, `diretor`, `duracao`, `generos`, `nome`, `sinopse`) VALUES ('Alexander Skarsgård, Millie Bobby Brown, Rebecca Hall, Brian Tyree Henry','Adam Wingard',113,'ação, aventura','Godzilla vs. Kong','Kong e seus protetores embarcam em uma jornada perigosa para encontrar seu verdadeiro lar. No entanto, eles logo se encontram no caminho de Godzilla, completamente enfurecido, deixando um rastro de destruição em todo o mundo.')
+INSERT INTO `filmes`( `nome`, `atores`, `diretor`, `duracao`, `generos`, `sinopse`) VALUES ('Godzilla vs. Kong','Alexander Skarsgård, Millie Bobby Brown, Rebecca Hall, Brian Tyree Henry','Adam Wingard',113,'ação, aventura','Kong e seus protetores embarcam em uma jornada perigosa para encontrar seu verdadeiro lar. No entanto, eles logo se encontram no caminho de Godzilla, completamente enfurecido, deixando um rastro de destruição em todo o mundo.')
 
 
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:14:00:00", 1, 1, 1);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:16:00:00", 1, 1, 1);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:20:00:00", 1, 1, 1);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:22:00:00", 1, 1, 1);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:12:00:00", 2, 5, 2);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:16:00:00", 2, 5, 2);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:20:00:00", 2, 5, 2);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:16:00:00", 3, 2, 2);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:18:00:00", 3, 2, 2);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:20:00:00", 3, 2, 2);
-insert into sessoes (horario, filme_id, sala_id, tipo_id) values ("2022-02-03:22:00:00", 3, 2, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","14:00:00", 1, 1, 1);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","16:00:00", 1, 1, 1);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","20:00:00", 1, 1, 1);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","22:00:00", 1, 1, 1);
 
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (1, 1, true, 1);
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (1, 2, false, 2);
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 3, true, 4);
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 4, false, 9);
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 5, true, 10);
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona) values (2, 6, false, 11);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","12:00:00", 2, 5, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","16:00:00", 2, 5, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","20:00:00", 2, 5, 2);
+
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","16:00:00", 3, 2, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","18:00:00", 3, 2, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","20:00:00", 3, 2, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","22:00:00", 3, 2, 2);
+
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-18", "12:00:00", 2, 5, 2);
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-18", "22:00:00", 3, 2, 2);
+
+insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-22", "12:00:00", 2, 5, 2);
+
+
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 1, true, 1, "2022-08-15");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 2, false, 2, "2022-08-15");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 3, true, 4, "2022-08-15");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 4, false, 9, "2022-08-17");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 5, true, 10, "2022-08-18");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 5, false, 11, "2022-08-19");
