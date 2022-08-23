@@ -38,13 +38,12 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
     @Override
     public Bilhete dtoParaEntidade(BilheteDTO dto) {
         Pessoa pessoa = null;
+
         if(dto.getPessoaId() != null){
             pessoa = pessoaRepository.findById(dto.getPessoaId()).orElse(null);
         }
-        else if(dto.getPessoa().getCpf() != null && dto.getPessoa().getNome() != null){
+        else{
             pessoa = pessoaRepository.save(pessoaConverter.dtoParaEntidade(dto.getPessoa()));
-        }else{
-            throw new RuntimeException("Precisa ter NOME e CPF!!!!!!!!!!!!!!");
         }
 
         Sessao sessao = sessaoService.porId(dto.getSessaoId());
