@@ -34,8 +34,10 @@ public class BilheteService extends CrudService<Bilhete, Long> {
         }
 
         for (Bilhete bilhete : sessao.getBilhetes()) {
-            if (bilhete.getPoltrona() == entidade.getPoltrona() && bilhete.getDiaSessao() == entidade.getDiaSessao()) {
-                throw new RuntimeException("Cadeira " + entidade.getPoltrona() + " já está ocupada");
+            if (bilhete.getPoltrona() == entidade.getPoltrona() && bilhete.getDiaSessao().equals(entidade.getDiaSessao())) {
+                throw new RuntimeException("A Poltrona "+entidade.getPoltrona()
+                        +" não está disponível para essa Sessão do dia "
+                        +entidade.getDiaSessao());
             }
         }
 

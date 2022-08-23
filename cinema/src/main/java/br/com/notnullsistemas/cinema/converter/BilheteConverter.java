@@ -6,15 +6,12 @@ import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.dto.BilheteDTO;
 import br.com.notnullsistemas.cinema.repository.PessoaRepository;
+import br.com.notnullsistemas.cinema.service.PessoaService;
 import br.com.notnullsistemas.cinema.service.SessaoService;
-import liquibase.util.NowAndTodayUtil;
 import lombok.AllArgsConstructor;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 @AllArgsConstructor
@@ -24,6 +21,7 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
     private final SessaoService sessaoService;
     private final PessoaConverter pessoaConverter;
     private final SessaoMinConverter sessaoMinConverter;
+    private final PessoaService pessoaService;
 
     @Override
     public BilheteDTO entidadeParaDto(Bilhete entidade) {
@@ -45,15 +43,8 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
 
     @Override
     public Bilhete dtoParaEntidade(BilheteDTO dto) {
-        Pessoa pessoa = null;
-        if (dto.getPessoaId() != null) {
-            pessoa = pessoaRepository.findById(dto.getPessoaId()).orElse(null);
-        } else if (dto.getPessoa().getCpf() != null && dto.getPessoa().getNome() != null) {
-            pessoa = pessoaRepository.save(pessoaConverter.dtoParaEntidade(dto.getPessoa()));
-        } else {
-            throw new RuntimeException("Precisa ter NOME e CPF!!!!!!!!!!!!!!");
-        }
 
+        Pessoa pessoa = pessoaService.porId(dto.getPessoaId());
         Sessao sessao = sessaoService.porId(dto.getSessaoId());
 
         Date agora = new Date();

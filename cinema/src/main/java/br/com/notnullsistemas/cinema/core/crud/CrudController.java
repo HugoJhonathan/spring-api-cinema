@@ -4,10 +4,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+
 public abstract class CrudController<T extends CrudDomain<ID>, D, ID> extends ReadController<T, D, ID> {
 
     @PostMapping
-    public ResponseEntity<D> criar(@RequestBody D dto) {
+    public ResponseEntity<D> criar(@RequestBody @Valid D dto) {
 
         var entidade = converter.dtoParaEntidade(dto);
         var salvo = service.criar(entidade);

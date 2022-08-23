@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,4 +26,5 @@ public class SessaoDTO implements Serializable {
     private FilmeDTO filme;
     private TipoDTO tipo;
     private List<BilheteMinDTO> bilhetes;
+
 }

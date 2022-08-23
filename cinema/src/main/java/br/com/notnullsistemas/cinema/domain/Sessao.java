@@ -1,22 +1,17 @@
 package br.com.notnullsistemas.cinema.domain;
 
+import br.com.notnullsistemas.cinema.core.crud.CrudDomain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.persistence.*;
-
-import br.com.notnullsistemas.cinema.core.crud.CrudDomain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @AllArgsConstructor
@@ -37,7 +32,7 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     private LocalDate dataInicio;
     private LocalDate dataFinal;
 
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     @ManyToOne
     @JsonIgnoreProperties("sessoes")

@@ -50,7 +50,7 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
         sessao.setHorario(dto.getHorario());
         sessao.setDataInicio(dto.getDataInicio());
         sessao.setDataFinal(dto.getDataFinal());
-        sessao.setAtivo(dto.getAtivo());
+
         sessao.setFilme(filmeRepository.findById(dto.getFilmeId()).orElse(null));
         sessao.setSala(salaRepository.findById(dto.getSalaId()).orElse(null));
         sessao.setTipo(tipoRepository.findById(dto.getTipoId()).orElse(null));
