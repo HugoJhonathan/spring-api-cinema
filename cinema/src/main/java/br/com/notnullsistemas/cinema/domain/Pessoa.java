@@ -18,6 +18,7 @@ public class Pessoa implements Serializable, CrudDomain<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique=true)
     private String cpf;
 
 }

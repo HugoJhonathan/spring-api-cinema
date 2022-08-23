@@ -33,7 +33,6 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
         bilhete.setTotal(entidade.getTotal());
         bilhete.setDataCompra(entidade.getDataCompra());
         bilhete.setDiaSessao(entidade.getDiaSessao());
-        bilhete.setPessoa(pessoaConverter.entidadeParaDto(entidade.getPessoa()));
         bilhete.setPessoaId(entidade.getPessoa().getId());
         bilhete.setSessaoId(entidade.getSessao().getId());
         bilhete.setSessao(sessaoMinConverter.entidadeParaDto(entidade.getSessao()));

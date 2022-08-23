@@ -64,7 +64,7 @@ public class Sessao implements Serializable, CrudDomain<Long> {
 
     public Double getTotal() {
         Double total = 0.0;
-        for (Bilhete bilhete : getBilhetes()) {
+        for (Bilhete bilhete : bilhetes) {
             if (bilhete.getMeia()) {
                 total += getTipo().getPreco() / 2;
             } else {

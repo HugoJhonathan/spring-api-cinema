@@ -26,7 +26,8 @@ public class PessoaService extends CrudService<Pessoa, Long> {
 
         if(Objects.isNull(pessoaR)){
             return repository.save(pessoa);
-        }else if(!pessoa.getNome().equals(pessoaR.getNome())){
+        }
+        else if(!pessoa.getNome().equals(pessoaR.getNome())){
             throw new RuntimeException("Nome inválido!");
         }
 

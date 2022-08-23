@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,15 +14,21 @@ import java.util.Date;
 @Data
 public class BilheteDTO implements Serializable {
 
+
     private Long id;
+    @NotNull
     private Integer poltrona;
+    @NotNull
     private Boolean meia;
     
     private Double total;
     private Date dataCompra;
+    @NotNull
     private LocalDate diaSessao;
-    private PessoaDTO pessoa;
+
+    @NotNull
     private Long pessoaId;
+    @NotNull
     private Long sessaoId;
     private SessaoMinDTO sessao;
 
