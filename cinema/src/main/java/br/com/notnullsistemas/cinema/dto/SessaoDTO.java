@@ -19,6 +19,7 @@ public class SessaoDTO implements Serializable {
     private LocalTime horario;
     @NotNull
     private LocalDate dataInicio;
+    @NotNull
     private LocalDate dataFinal;
     private Double total;
     private Boolean ativo;
@@ -32,6 +33,8 @@ public class SessaoDTO implements Serializable {
     private FilmeDTO filme;
     private TipoDTO tipo;
     private List<BilheteMinDTO> bilhetes;
+
+    private List<Integer> ocupadas;
 
 
 }

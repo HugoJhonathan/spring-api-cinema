@@ -40,6 +40,8 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
         dto.setBilhetes(entidade.getBilhetes()
                 .stream().map(bilheteMinConverter::entidadeParaDto)
                 .collect(Collectors.toList()));
+        dto.setOcupadas(entidade.getOcupadas());
+
         return dto;
     }
 

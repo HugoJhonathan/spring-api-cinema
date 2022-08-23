@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -19,6 +20,7 @@ public class BilheteMinDTO implements Serializable {
     private Double total;
     private Date dataCompra;
     private LocalDate diaSessao;
+    private LocalTime horarioSessao;
     private PessoaDTO pessoa;
     private Long pessoaId;
     private Long sessaoId;

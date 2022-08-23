@@ -20,7 +20,7 @@ INSERT INTO `filmes`( `nome`, `atores`, `diretor`, `duracao`, `generos`, `sinops
 INSERT INTO `filmes`( `nome`, `atores`, `diretor`, `duracao`, `generos`, `sinopse`) VALUES ('Godzilla vs. Kong','Alexander Skarsgård, Millie Bobby Brown, Rebecca Hall, Brian Tyree Henry','Adam Wingard',113,'ação, aventura','Kong e seus protetores embarcam em uma jornada perigosa para encontrar seu verdadeiro lar. No entanto, eles logo se encontram no caminho de Godzilla, completamente enfurecido, deixando um rastro de destruição em todo o mundo.')
 
 
-insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","14:00:00", 1, 1, 1);
+insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id) values ("2022-08-15", "2022-08-20","14:00:00", 1, 1, 1);
 insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","16:00:00", 1, 1, 1);
 insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","20:00:00", 1, 1, 1);
 insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","22:00:00", 1, 1, 1);
@@ -41,7 +41,7 @@ insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("
 
 
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 1, true, 1, "2022-08-15");
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 2, false, 2, "2022-08-15");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 2, false, 2, "2022-08-16");
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 3, true, 4, "2022-08-15");
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 4, false, 9, "2022-08-17");
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 5, true, 10, "2022-08-18");
