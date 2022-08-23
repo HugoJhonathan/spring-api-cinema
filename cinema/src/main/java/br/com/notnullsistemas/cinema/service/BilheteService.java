@@ -29,19 +29,19 @@ public class BilheteService extends CrudService<Bilhete, Long> {
         Pessoa pessoa = pessoaService.porId(entidade.getPessoa().getId());
         entidade.setPessoa(pessoa);
 
-        if(entidade.getPoltrona() <= 0 || entidade.getPoltrona() > sessao.getSala().getCapacidade()){
+        if (entidade.getPoltrona() <= 0 || entidade.getPoltrona() > sessao.getSala().getCapacidade()) {
             throw new RuntimeException("Cadeira invalida");
         }
 
         for (Bilhete bilhete : sessao.getBilhetes()) {
-            if (bilhete.getPoltrona() == entidade.getPoltrona()) {
-                throw new RuntimeException("Cadeira "+entidade.getPoltrona()+" já está ocupada");
+            if (bilhete.getPoltrona() == entidade.getPoltrona() && bilhete.getDiaSessao() == entidade.getDiaSessao()) {
+                throw new RuntimeException("Cadeira " + entidade.getPoltrona() + " já está ocupada");
             }
         }
 
-        if(entidade.getMeia()){
-            entidade.setTotal(sessao.getTipo().getPreco()/2);
-        }else{
+        if (entidade.getMeia()) {
+            entidade.setTotal(sessao.getTipo().getPreco() / 2);
+        } else {
             entidade.setTotal(sessao.getTipo().getPreco());
         }
 

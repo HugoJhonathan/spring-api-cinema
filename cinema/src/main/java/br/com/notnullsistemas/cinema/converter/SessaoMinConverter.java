@@ -19,6 +19,9 @@ public class SessaoMinConverter implements CrudConverter<Sessao, SessaoMinDTO> {
         SessaoMinDTO sessaoMinDTO = new SessaoMinDTO();
         sessaoMinDTO.setId(entidade.getId());
         sessaoMinDTO.setHorario(entidade.getHorario());
+        sessaoMinDTO.setDataInicio(entidade.getDataInicio());
+        sessaoMinDTO.setDataFinal(entidade.getDataFinal());
+        sessaoMinDTO.setAtivo(entidade.getAtivo());
         sessaoMinDTO.setSala(salaConverter.entidadeParaDto(entidade.getSala()));
         sessaoMinDTO.setFilme(filmeConverter.entidadeParaDto(entidade.getFilme()));
         sessaoMinDTO.setTipo(tipoConverter.entidadeParaDto(entidade.getTipo()));

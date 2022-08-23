@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -22,6 +24,10 @@ public class Bilhete implements Serializable, CrudDomain<Long> {
     @ManyToOne
     @JsonIgnoreProperties("bilhetes")
     private Pessoa pessoa;
+
+    private Date dataCompra;
+
+    private LocalDate diaSessao;
 
     private Integer poltrona;
 

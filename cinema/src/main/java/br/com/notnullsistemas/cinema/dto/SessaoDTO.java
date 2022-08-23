@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +15,11 @@ import java.util.List;
 @Data
 public class SessaoDTO implements Serializable {
     private Long id;
-    private Date horario;
+    private LocalTime horario;
+    private LocalDate dataInicio;
+    private LocalDate dataFinal;
     private Double total;
+    private Boolean ativo;
     private Long filmeId;
     private Long salaId;
     private Long tipoId;

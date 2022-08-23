@@ -30,7 +30,10 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
         var dto = new SessaoDTO();
         dto.setId(entidade.getId());
         dto.setHorario(entidade.getHorario());
+        dto.setDataInicio(entidade.getDataInicio());
+        dto.setDataFinal(entidade.getDataFinal());
         dto.setTotal(entidade.getTotal());
+        dto.setAtivo(entidade.getAtivo());
         dto.setFilme(filmeConverter.entidadeParaDto(entidade.getFilme()));
         dto.setSala(salaConverter.entidadeParaDto(entidade.getSala()));
         dto.setTipo(tipoConverter.entidadeParaDto(entidade.getTipo()));
@@ -45,6 +48,9 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
         var sessao = new Sessao();
         sessao.setId(dto.getId());
         sessao.setHorario(dto.getHorario());
+        sessao.setDataInicio(dto.getDataInicio());
+        sessao.setDataFinal(dto.getDataFinal());
+        sessao.setAtivo(dto.getAtivo());
         sessao.setFilme(filmeRepository.findById(dto.getFilmeId()).orElse(null));
         sessao.setSala(salaRepository.findById(dto.getSalaId()).orElse(null));
         sessao.setTipo(tipoRepository.findById(dto.getTipoId()).orElse(null));

@@ -7,7 +7,13 @@ import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.dto.BilheteDTO;
 import br.com.notnullsistemas.cinema.repository.PessoaRepository;
 import br.com.notnullsistemas.cinema.service.SessaoService;
+import liquibase.util.NowAndTodayUtil;
 import lombok.AllArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,6 +33,8 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
         bilhete.setPoltrona(entidade.getPoltrona());
         bilhete.setMeia(entidade.getMeia());
         bilhete.setTotal(entidade.getTotal());
+        bilhete.setDataCompra(entidade.getDataCompra());
+        bilhete.setDiaSessao(entidade.getDiaSessao());
         bilhete.setPessoa(pessoaConverter.entidadeParaDto(entidade.getPessoa()));
         bilhete.setPessoaId(entidade.getPessoa().getId());
         bilhete.setSessaoId(entidade.getSessao().getId());
@@ -38,22 +46,26 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
     @Override
     public Bilhete dtoParaEntidade(BilheteDTO dto) {
         Pessoa pessoa = null;
-        if(dto.getPessoaId() != null){
+        if (dto.getPessoaId() != null) {
             pessoa = pessoaRepository.findById(dto.getPessoaId()).orElse(null);
-        }
-        else if(dto.getPessoa().getCpf() != null && dto.getPessoa().getNome() != null){
+        } else if (dto.getPessoa().getCpf() != null && dto.getPessoa().getNome() != null) {
             pessoa = pessoaRepository.save(pessoaConverter.dtoParaEntidade(dto.getPessoa()));
-        }else{
+        } else {
             throw new RuntimeException("Precisa ter NOME e CPF!!!!!!!!!!!!!!");
         }
 
         Sessao sessao = sessaoService.porId(dto.getSessaoId());
+
+        Date agora = new Date();
+        dto.setDataCompra(agora);
 
         Bilhete bilhete = new Bilhete();
         bilhete.setPessoa(pessoa);
         bilhete.setPoltrona(dto.getPoltrona());
         bilhete.setMeia(dto.getMeia());
         bilhete.setTotal(dto.getTotal());
+        bilhete.setDataCompra(dto.getDataCompra());
+        bilhete.setDiaSessao(dto.getDiaSessao());
         bilhete.setSessao(sessao);
 
         return bilhete;
