@@ -15,33 +15,43 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/sessoes")
-public class SessaoController extends CrudController<Sessao, SessaoDTO, Long>{
+public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
 
     @Autowired
     private BilheteRepository bilheteRepository;
 
     @GetMapping("/{id}/{dia}")
-    public ResponseEntity<SessaoDTO> sessaoDeUmDia(@PathVariable("id") Long id, @PathVariable("dia") String dia){
+    public ResponseEntity<SessaoDTO> sessaoDeUmDia(@PathVariable("id") Long id, @PathVariable("dia") String dia) {
         LocalDate diaSessao = LocalDate.parse(dia);
         Sessao sessao = service.porId(id);
 
-        if(diaSessao.isBefore(sessao.getDataInicio()) || diaSessao.isAfter(sessao.getDataFinal())){
+        if (diaSessao.isBefore(sessao.getDataInicio()) || diaSessao.isAfter(sessao.getDataFinal())) {
             throw new RuntimeException("Data inválida");
         }
 
-        var bilhetes= bilheteRepository.findByDiaSessaoAndSessaoId(diaSessao, id);
+        var bilhetes = bilheteRepository.findByDiaSessaoAndSessaoId(diaSessao, id);
         sessao.setBilhetes(bilhetes);
 
         return ResponseEntity.ok(converter.entidadeParaDto(sessao));
     }
 
-   @GetMapping("/pesquisa")
-    public ResponseEntity<List<SessaoDTO>> listarTodos(@RequestParam(value = "de", required = false) String de, @RequestParam(value = "ate", required = false) String ate){
+    @GetMapping("/pesquisa")
+    public ResponseEntity<List<SessaoDTO>> listarTodos(@RequestParam(value = "de", required = false) String de, @RequestParam(value = "ate", required = false) String ate) {
+        var de_ = LocalDate.parse(de);
+        var ate_ = LocalDate.parse(ate);
 
-        if(!Objects.isNull(de)){
-            if(Objects.isNull(ate)){
+        if (!Objects.isNull(de)) {
+
+            if (Objects.isNull(ate)) {
                 ate = de;
             }
+
+            var sessoes = service.findByInterval(de, ate);
+
+            sessoes.stream().forEach(sessao -> {
+                sessao.setBilhetes(bilheteRepository
+                        .procurarBilheteDeUmaSessaoPorIntervalo(de_, ate_, sessao.getId()));
+            });
 
             List<SessaoDTO> entidades = service.findByInterval(de, ate)
                     .stream()
@@ -51,7 +61,7 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long>{
             return ResponseEntity.ok(entidades);
         }
 
-        var ListaDto= service.listar()
+        var ListaDto = service.listar()
                 .stream()
                 .map(converter::entidadeParaDto)
                 .collect(Collectors.toList());

@@ -40,9 +40,9 @@ insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_i
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id) values ("2022-08-12", "2022-08-14", "12:00:00", 2, 5, 2);
 
 
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 1, true, 1, "2022-08-15");
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 2, false, 2, "2022-08-16");
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 3, true, 4, "2022-08-15");
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 4, false, 9, "2022-08-17");
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 5, true, 10, "2022-08-18");
-insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (2, 5, false, 11, "2022-08-19");
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (1, 1, true, 1, "2022-08-15", 10);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (1, 2, false, 2, "2022-08-16", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 3, true, 4, "2022-08-15", 10);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 4, false, 9, "2022-08-17", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 5, true, 10, "2022-08-18", 10);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 5, false, 11, "2022-08-19", 20);

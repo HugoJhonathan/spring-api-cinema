@@ -16,6 +16,6 @@ public class PessoaDTO implements Serializable {
     @NotNull
     private String nome;
     @NotNull
-    @CPF(message="CPF Inválido!")
+    // @CPF(message="CPF Inválido!")
     private String cpf;
 }
