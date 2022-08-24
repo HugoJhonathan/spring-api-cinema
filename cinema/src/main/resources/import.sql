@@ -35,9 +35,9 @@ insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("
 insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-15","22:00:00", 3, 2, 2);
 
 insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-18", "12:00:00", 2, 5, 2);
-insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-18", "22:00:00", 3, 2, 2);
+insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id) values ("2022-08-18", "2022-08-22", "22:00:00", 3, 2, 2);
 
-insert into sessoes (data_inicio, horario, filme_id, sala_id, tipo_id) values ("2022-08-22", "12:00:00", 2, 5, 2);
+insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id) values ("2022-08-12", "2022-08-14", "12:00:00", 2, 5, 2);
 
 
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao) values (1, 1, true, 1, "2022-08-15");

@@ -6,6 +6,7 @@ import br.com.notnullsistemas.cinema.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -18,6 +19,12 @@ public class PessoaService extends CrudService<Pessoa, Long> {
     protected Pessoa editarEntidade(Pessoa recuperado, Pessoa entidade) {
         return null;
     }
+
+    @Override
+    public List<Pessoa> findByInterval(String de, String ate) {
+        return null;
+    }
+
 
     @Override
     public Pessoa criar(Pessoa pessoa){

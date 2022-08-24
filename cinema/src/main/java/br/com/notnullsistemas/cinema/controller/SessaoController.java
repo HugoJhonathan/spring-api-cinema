@@ -6,16 +6,16 @@ import br.com.notnullsistemas.cinema.dto.SessaoDTO;
 import br.com.notnullsistemas.cinema.repository.BilheteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/sessoes")
-public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
+public class SessaoController extends CrudController<Sessao, SessaoDTO, Long>{
 
     @Autowired
     private BilheteRepository bilheteRepository;
@@ -33,6 +33,30 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
         sessao.setBilhetes(bilhetes);
 
         return ResponseEntity.ok(converter.entidadeParaDto(sessao));
+    }
+
+   @GetMapping("/pesquisa")
+    public ResponseEntity<List<SessaoDTO>> listarTodos(@RequestParam(value = "de", required = false) String de, @RequestParam(value = "ate", required = false) String ate){
+
+        if(!Objects.isNull(de)){
+            if(Objects.isNull(ate)){
+                ate = de;
+            }
+
+            List<SessaoDTO> entidades = service.findByInterval(de, ate)
+                    .stream()
+                    .map(converter::entidadeParaDto)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(entidades);
+        }
+
+        var ListaDto= service.listar()
+                .stream()
+                .map(converter::entidadeParaDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(ListaDto);
     }
 
 }

@@ -7,6 +7,8 @@ import br.com.notnullsistemas.cinema.domain.Sessao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BilheteService extends CrudService<Bilhete, Long> {
 
@@ -20,6 +22,11 @@ public class BilheteService extends CrudService<Bilhete, Long> {
     private SalaService salaService;
 
     protected Bilhete editarEntidade(Bilhete recuperado, Bilhete entidade) {
+        return null;
+    }
+
+    @Override
+    public List<Bilhete> findByInterval(String de, String ate) {
         return null;
     }
 

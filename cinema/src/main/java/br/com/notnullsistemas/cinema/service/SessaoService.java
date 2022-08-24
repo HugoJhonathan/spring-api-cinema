@@ -6,6 +6,8 @@ import br.com.notnullsistemas.cinema.repository.SessaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -17,6 +19,11 @@ public class SessaoService extends CrudService<Sessao, Long> {
     @Override
     protected Sessao editarEntidade(Sessao recuperado, Sessao entidade) {
         return null;
+    }
+
+    @Override
+    public List<Sessao> findByInterval(String de, String ate) {
+        return sessaoRepository.procurarSessaoPorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
     }
 
     @Override
