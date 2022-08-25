@@ -46,3 +46,9 @@ insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) v
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 4, false, 9, "2022-08-17", 20);
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 5, true, 10, "2022-08-18", 10);
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (2, 5, false, 11, "2022-08-19", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (5, 2, false, 11, "2022-08-19", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (6, 1, false, 11, "2022-08-19", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (7, 3, false, 11, "2022-08-19", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (8, 4, false, 11, "2022-08-19", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (10, 4, false, 11, "2022-08-19", 20);
+insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (9, 5, false, 11, "2022-08-19", 20);
