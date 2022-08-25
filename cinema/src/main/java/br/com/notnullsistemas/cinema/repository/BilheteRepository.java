@@ -18,7 +18,4 @@ public interface BilheteRepository extends CrudRepository<Bilhete, Long> {
     @Query("from Bilhete b where b.diaSessao between :de AND :ate")
     List<Bilhete> procurarBilhetePorIntervalo(@Param("de") LocalDate de, @Param("ate") LocalDate ate);
 
-    @Query(value = "select * from bilhetes where (bilhetes.sessao_id = :sessaoID) AND (bilhetes.dia_sessao between :de AND :ate)", nativeQuery = true)
-    List<Bilhete> procurarBilheteDeUmaSessaoPorIntervalo(@Param("de") LocalDate de, @Param("ate") LocalDate ate, @Param("sessaoID") Long id);
-
 }

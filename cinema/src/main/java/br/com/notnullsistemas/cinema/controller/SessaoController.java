@@ -37,8 +37,6 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
 
     @GetMapping("/pesquisa")
     public ResponseEntity<List<SessaoDTO>> listarTodos(@RequestParam(value = "de", required = false) String de, @RequestParam(value = "ate", required = false) String ate) {
-        var de_ = LocalDate.parse(de);
-        var ate_ = LocalDate.parse(ate);
 
         if (!Objects.isNull(de)) {
 
@@ -46,19 +44,20 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
                 ate = de;
             }
 
-            var sessoes = service.findByInterval(de, ate);
+            var de_ = LocalDate.parse(de);
+            var ate_ = LocalDate.parse(ate);
 
-            sessoes.stream().forEach(sessao -> {
-                sessao.setBilhetes(bilheteRepository
-                        .procurarBilheteDeUmaSessaoPorIntervalo(de_, ate_, sessao.getId()));
-            });
+//            sessoes.stream().forEach(sessao -> {
+//                sessao.setBilhetes(bilheteRepository
+//                        .procurarBilheteDeUmaSessaoPorIntervalo(de_, ate_, sessao.getId()));
+//            });
 
-            List<SessaoDTO> entidades = service.findByInterval(de, ate)
+            List<SessaoDTO> sessoesDto = service.findByInterval(de, ate)
                     .stream()
                     .map(converter::entidadeParaDto)
                     .collect(Collectors.toList());
 
-            return ResponseEntity.ok(entidades);
+            return ResponseEntity.ok(sessoesDto);
         }
 
         var ListaDto = service.listar()

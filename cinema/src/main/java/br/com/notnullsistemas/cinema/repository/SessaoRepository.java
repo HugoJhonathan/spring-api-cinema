@@ -12,12 +12,11 @@ import java.util.List;
 
 @Repository
 public interface SessaoRepository extends CrudRepository<Sessao, Long> {
+
     @Query(nativeQuery = true, value = "SELECT * FROM sessoes WHERE horario =:horario AND sala_id =:sala AND ativo = 1")
     Sessao sessaoAtiva(@Param("horario") LocalTime horario, @Param("sala") Long sala);
 
     @Query("from Sessao s where (s.dataInicio between :de AND :ate) OR (s.dataFinal between :de AND :ate) OR s.dataInicio <= :de AND s.dataFinal >= :de")
     List<Sessao> procurarSessaoPorIntervalo(@Param("de") LocalDate de, @Param("ate") LocalDate ate);
-        // incio 12 - 14 fim
-        // de    16 - 16
 
 }

@@ -1,12 +1,14 @@
 package br.com.notnullsistemas.cinema.service;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
+import br.com.notnullsistemas.cinema.domain.Bilhete;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.repository.SessaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +25,9 @@ public class SessaoService extends CrudService<Sessao, Long> {
 
     @Override
     public List<Sessao> findByInterval(String de, String ate) {
-        return sessaoRepository.procurarSessaoPorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
+        var sessoes = sessaoRepository.procurarSessaoPorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
+        filtrarBilhetes(sessoes, LocalDate.parse(de), LocalDate.parse(ate));
+        return sessoes;
     }
 
     @Override
@@ -45,6 +49,20 @@ public class SessaoService extends CrudService<Sessao, Long> {
         Sessao saved = repository.save(entidade);
 
         return repository.findById(saved.getId()).orElse(null);
+    }
+
+
+    private void filtrarBilhetes(List<Sessao> sessoes, LocalDate de_, LocalDate ate_){
+        sessoes.stream().forEach(sessao_ -> {
+
+            Iterator<Bilhete> iter = sessao_.getBilhetes().iterator();
+            while (iter.hasNext()) {
+                Bilhete bilhete = iter.next();
+                if (!(bilhete.getDiaSessao().isAfter(de_.minusDays(1)) && bilhete.getDiaSessao().isBefore(ate_.plusDays(1)))) {
+                    iter.remove();
+                }
+            }
+        });
     }
 
 }
