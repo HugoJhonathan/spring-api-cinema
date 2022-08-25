@@ -19,4 +19,16 @@ public interface SessaoRepository extends CrudRepository<Sessao, Long> {
     @Query("from Sessao s where (s.dataInicio between :de AND :ate) OR (s.dataFinal between :de AND :ate) OR s.dataInicio <= :de AND s.dataFinal >= :de")
     List<Sessao> procurarSessaoPorIntervalo(@Param("de") LocalDate de, @Param("ate") LocalDate ate);
 
+    @Query("select s from Sessao s JOIN s.filme f JOIN s.tipo t WHERE f.id = :idFilme AND t.id = :idTipo")
+    List<Sessao> listarSessoesDeUmDeterminadoFilmeEtipo(@Param("idFilme") Long idFilme, @Param("idTipo") Long idTipo);
+
+    @Query("from Sessao s where s.horario = :horario AND ((s.dataInicio between :de AND :ate) OR (s.dataFinal between :de AND :ate) OR s.dataInicio <= :de AND s.dataFinal >= :de)")
+    List<Sessao> listarSessoesDeUmHorarioEmUmPeriodo(@Param("horario") LocalTime horario, @Param("de") LocalDate de, @Param("ate") LocalDate ate);
+
+    @Query("from Sessao s JOIN s.sala sa WHERE sa.id = :idSala AND ((s.dataInicio between :de AND :ate) OR (s.dataFinal between :de AND :ate) OR s.dataInicio <= :de AND s.dataFinal >= :de)")
+    List<Sessao> listarSessoesDeUmaSalaEmUmPeriodo(@Param("idSala") Long id, @Param("de") LocalDate de, @Param("ate") LocalDate ate);
+
+    @Query("from Sessao s JOIN s.sala sa WHERE sa.id = :idSala")
+    List<Sessao> listarSessoesDeUmaSala(@Param("idSala") Long id);
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -24,13 +25,6 @@ public class SessaoService extends CrudService<Sessao, Long> {
     }
 
     @Override
-    public List<Sessao> findByInterval(String de, String ate) {
-        var sessoes = sessaoRepository.procurarSessaoPorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
-        filtrarBilhetes(sessoes, LocalDate.parse(de), LocalDate.parse(ate));
-        return sessoes;
-    }
-
-    @Override
     public Sessao criar(Sessao entidade) {
 
         Sessao sessaoAntiga = sessaoRepository.sessaoAtiva(entidade.getHorario(), entidade.getSala().getId());
@@ -39,20 +33,28 @@ public class SessaoService extends CrudService<Sessao, Long> {
             sessaoAntiga.setAtivo(false);
             repository.save(sessaoAntiga);
         }
-        var dataFinal = entidade.getDataFinal();
+        LocalDate dataFinal = entidade.getDataFinal();
 
-        if(Objects.isNull(dataFinal)){
-            var dataInicio = entidade.getDataInicio();
+        if (Objects.isNull(dataFinal)) {
+            LocalDate dataInicio = entidade.getDataInicio();
             entidade.setDataFinal(dataInicio.plusDays(7));
         }
 
         Sessao saved = repository.save(entidade);
 
-        return repository.findById(saved.getId()).orElse(null);
+        return porId(saved.getId());
+    }
+
+    @Override
+    public List<Sessao> findByInterval(String de, String ate) {
+        List<Sessao> sessoes = sessaoRepository.procurarSessaoPorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
+        filtrarBilhetes(sessoes, LocalDate.parse(de), LocalDate.parse(ate));
+        return sessoes;
     }
 
 
-    private void filtrarBilhetes(List<Sessao> sessoes, LocalDate de_, LocalDate ate_){
+
+    private void filtrarBilhetes(List<Sessao> sessoes, LocalDate de_, LocalDate ate_) {
         sessoes.stream().forEach(sessao_ -> {
 
             Iterator<Bilhete> iter = sessao_.getBilhetes().iterator();
@@ -63,6 +65,42 @@ public class SessaoService extends CrudService<Sessao, Long> {
                 }
             }
         });
+    }
+
+    public List<Sessao> listarTodos(String horario, String de, String ate){
+        if (!Objects.isNull(de)) {
+
+            if (Objects.isNull(ate)) {
+                ate = de;
+            }
+
+            LocalDate de_ = LocalDate.parse(de);
+            LocalDate ate_ = LocalDate.parse(ate);
+
+            if (!Objects.isNull(horario)) {
+                List<Sessao> sessoes = sessaoRepository.listarSessoesDeUmHorarioEmUmPeriodo(LocalTime.parse(horario), de_, ate_);
+                filtrarBilhetes(sessoes, de_, ate_);
+                return sessoes;
+            }
+
+            return findByInterval(de, ate);
+        }
+
+        return listar();
+    }
+
+    public List<Sessao> listarSessoesDeUmaSala(Long id, String de, String ate) {
+        if (Objects.isNull(ate)) {
+            ate = de;
+        }
+
+        if (Objects.isNull(de)) {
+            List<Sessao> sessoes = sessaoRepository.listarSessoesDeUmaSala(id);
+            return sessoes;
+        }
+
+        List<Sessao> sessoes = sessaoRepository.listarSessoesDeUmaSalaEmUmPeriodo(id, LocalDate.parse(de), LocalDate.parse(ate));
+        return sessoes;
     }
 
 }
