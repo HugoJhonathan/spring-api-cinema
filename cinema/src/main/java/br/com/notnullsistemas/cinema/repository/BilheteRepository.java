@@ -18,4 +18,9 @@ public interface BilheteRepository extends CrudRepository<Bilhete, Long> {
     @Query("from Bilhete b where b.diaSessao between :de AND :ate")
     List<Bilhete> procurarBilhetePorIntervalo(@Param("de") LocalDate de, @Param("ate") LocalDate ate);
 
+    @Query("from Bilhete b join b.sessao s join s.tipo t where t.id = :id")
+    List<Bilhete> buscarPorTipo(@Param("id") Long id);
+
+    @Query("from Bilhete b join b.sessao s join s.tipo t where (t.id = :id) and (b.diaSessao between :de AND :ate)")
+    List<Bilhete> buscarPorTipoData(@Param("id") Long id, @Param("de") LocalDate de, @Param("ate") LocalDate ate);
 }

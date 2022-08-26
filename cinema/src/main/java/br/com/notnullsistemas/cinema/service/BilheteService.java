@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BilheteService extends CrudService<Bilhete, Long> {
@@ -20,9 +22,6 @@ public class BilheteService extends CrudService<Bilhete, Long> {
 
     @Autowired
     private PessoaService pessoaService;
-
-    // @Autowired
-    // private SalaService salaService;
 
     @Autowired
     private BilheteRepository bilheteRepository;
@@ -64,6 +63,71 @@ public class BilheteService extends CrudService<Bilhete, Long> {
         Bilhete saved = repository.save(entidade);
 
         return repository.findById(saved.getId()).orElse(null);
+    }
+
+    public List<Bilhete> buscarBilhetesEmSessoes(List<Sessao> sessoes, String de, String ate) {
+        List<Bilhete> listaBilhetes = new ArrayList<>();
+
+        final String ate_;
+        if (Objects.isNull(ate)) {
+            ate_ = de;
+        } else {
+            ate_ = ate;
+        }
+
+        sessoes.stream().forEach(sessao -> {
+            sessao.getBilhetes().stream().forEach(bilhete -> {
+                if (Objects.isNull(de)) {
+                    listaBilhetes.add(bilhete);
+                } else {
+                    if ((bilhete.getDiaSessao().isEqual(LocalDate.parse(de))
+                            || bilhete.getDiaSessao().isAfter(LocalDate.parse(de)))
+                            && (bilhete.getDiaSessao().isEqual(LocalDate.parse(ate_))
+                                    || bilhete.getDiaSessao().isBefore(LocalDate.parse(ate_)))) {
+                        listaBilhetes.add(bilhete);
+                    }
+                }
+            });
+        });
+        return listaBilhetes;
+    }
+
+    public List<Bilhete> bilhetesPorTipo(Long id, String de, String ate) {
+        final String ate_;
+        if (!Objects.isNull(de)) {
+            if (Objects.isNull(ate)) {
+                ate_ = de;
+            } else {
+                ate_ = ate;
+            }
+            return bilheteRepository.buscarPorTipoData(id, LocalDate.parse(de), LocalDate.parse(ate_));
+        } else {
+            return bilheteRepository.buscarPorTipo(id);
+        }
+    }
+
+    public List<Bilhete> bilhetesPorSessao(Sessao sessao, String de, String ate) {
+        List<Bilhete> listaBilhetes = new ArrayList<>();
+        final String ate_;
+        if (Objects.isNull(ate)) {
+            ate_ = de;
+        } else {
+            ate_ = ate;
+        }
+        sessao.getBilhetes().stream().forEach(bilhete -> {
+            if (Objects.isNull(de)) {
+                listaBilhetes.add(bilhete);
+            } else {
+                if ((bilhete.getDiaSessao().isEqual(LocalDate.parse(de))
+                        || bilhete.getDiaSessao().isAfter(LocalDate.parse(de)))
+                        && (bilhete.getDiaSessao().isEqual(LocalDate.parse(ate_))
+                                || bilhete.getDiaSessao().isBefore(LocalDate.parse(ate_)))) {
+                    listaBilhetes.add(bilhete);
+                }
+            }
+        });
+
+        return listaBilhetes;
     }
 
 }
