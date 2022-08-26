@@ -29,7 +29,7 @@ public class BilheteController extends CrudController<Bilhete, BilheteDTO, Long>
     private BilheteService bilheteService;
     @Autowired
     private SessaoService sessaoService;
-
+    
     @Autowired
     private FilmeRepository filmeRepository;
 
