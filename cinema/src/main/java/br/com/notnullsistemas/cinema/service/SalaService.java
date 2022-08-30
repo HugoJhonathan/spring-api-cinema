@@ -1,23 +1,29 @@
 package br.com.notnullsistemas.cinema.service;
 
-import org.springframework.stereotype.Service;
-
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
 import br.com.notnullsistemas.cinema.domain.Sala;
-
-import java.util.List;
+import br.com.notnullsistemas.cinema.repository.SalaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SalaService extends CrudService<Sala, Long> {
 
+    @Autowired
+    private SalaRepository salaRepository;
     @Override
-    protected Sala editarEntidade(Sala recuperado, Sala entidade) {
-        return null;
+    protected void validar(Sala entidade) {
+        boolean salaExiste = salaRepository.existsByNome(entidade.getNome());
+        if(salaExiste){
+            throw new RuntimeException("Sala já cadastrada.");
+        }
     }
 
     @Override
-    public List<Sala> findByInterval(String de, String ate) {
-        return null;
+    protected void editarEntidade(Sala entidade, Sala recuperado) {
+        recuperado.setId(entidade.getId());
+        recuperado.setNome(entidade.getNome());
+        recuperado.setCapacidade(entidade.getCapacidade());
     }
 
 

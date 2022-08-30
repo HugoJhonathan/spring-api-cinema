@@ -9,7 +9,7 @@ import javax.validation.Valid;
 public abstract class CrudController<T extends CrudDomain<ID>, D, ID> extends ReadController<T, D, ID> {
 
     @PostMapping
-    public ResponseEntity<D> criar(@RequestBody @Valid D dto) {
+    public ResponseEntity<D> criar(@RequestBody @Valid D dto) throws Exception {
 
         var entidade = converter.dtoParaEntidade(dto);
         var salvo = service.criar(entidade);
@@ -21,7 +21,7 @@ public abstract class CrudController<T extends CrudDomain<ID>, D, ID> extends Re
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<D> editar(@RequestBody D dto, @PathVariable("id") ID id){
+    public ResponseEntity<D> editar(@RequestBody D dto, @PathVariable("id") ID id) throws Exception {
 
         var novaEntidade = converter.dtoParaEntidade(dto);
         var salvo = service.editar(id, novaEntidade);

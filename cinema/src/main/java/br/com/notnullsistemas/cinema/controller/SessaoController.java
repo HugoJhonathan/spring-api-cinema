@@ -29,7 +29,7 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
     private SessaoService sessaoService;
 
     @GetMapping("/{id}/{dia}")
-    public ResponseEntity<SessaoDTO> sessaoDeUmDia(@PathVariable("id") Long id, @PathVariable("dia") String dia) {
+    public ResponseEntity<SessaoDTO> sessaoDeUmDia(@PathVariable("id") Long id, @PathVariable("dia") String dia) throws Exception {
         LocalDate diaSessao = LocalDate.parse(dia);
         Sessao sessao = service.porId(id);
 

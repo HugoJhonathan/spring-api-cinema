@@ -35,7 +35,7 @@ public abstract class ReadController<T extends CrudDomain<ID>, D, ID> {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<D> listarUm(@PathVariable("id") ID id){
+    public ResponseEntity<D> listarUm(@PathVariable("id") ID id) throws Exception {
 
         var entidade = service.porId(id);
 

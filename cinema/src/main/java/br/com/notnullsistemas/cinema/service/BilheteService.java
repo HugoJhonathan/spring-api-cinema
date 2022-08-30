@@ -26,17 +26,8 @@ public class BilheteService extends CrudService<Bilhete, Long> {
     @Autowired
     private BilheteRepository bilheteRepository;
 
-    protected Bilhete editarEntidade(Bilhete recuperado, Bilhete entidade) {
-        return null;
-    }
-
     @Override
-    public List<Bilhete> findByInterval(String de, String ate) {
-        return bilheteRepository.procurarBilhetePorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
-    }
-
-    @Override
-    public Bilhete criar(Bilhete entidade) {
+    protected void validar(Bilhete entidade) throws Exception {
         Sessao sessao = sessaoService.porId(entidade.getSessao().getId());
         Pessoa pessoa = pessoaService.porId(entidade.getPessoa().getId());
         entidade.setPessoa(pessoa);
@@ -59,10 +50,20 @@ public class BilheteService extends CrudService<Bilhete, Long> {
         } else {
             entidade.setTotal(sessao.getTipo().getPreco());
         }
+    }
 
-        Bilhete saved = repository.save(entidade);
+    @Override
+    protected void editarEntidade(Bilhete entidade, Bilhete recuperado) {
+        recuperado.setId(entidade.getId());
+        recuperado.setPessoa(entidade.getPessoa());
+        recuperado.setDataCompra(entidade.getDataCompra());
+        recuperado.setDiaSessao(entidade.getDiaSessao());
+        recuperado.setPoltrona(entidade.getPoltrona());
+        recuperado.setTotal(entidade.getTotal());
+    }
 
-        return repository.findById(saved.getId()).orElse(null);
+    public List<Bilhete> findByInterval(String de, String ate) {
+        return bilheteRepository.procurarBilhetePorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
     }
 
     public List<Bilhete> buscarBilhetesEmSessoes(List<Sessao> sessoes, String de, String ate) {

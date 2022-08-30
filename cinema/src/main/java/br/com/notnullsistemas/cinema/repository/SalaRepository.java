@@ -7,4 +7,5 @@ import br.com.notnullsistemas.cinema.domain.Sala;
 @Repository
 public interface SalaRepository extends CrudRepository<Sala, Long> {
 
+    boolean existsByNome(String nome);
 }

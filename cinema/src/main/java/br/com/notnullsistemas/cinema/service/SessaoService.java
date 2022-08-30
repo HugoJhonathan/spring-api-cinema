@@ -20,13 +20,7 @@ public class SessaoService extends CrudService<Sessao, Long> {
     private SessaoRepository sessaoRepository;
 
     @Override
-    protected Sessao editarEntidade(Sessao recuperado, Sessao entidade) {
-        return null;
-    }
-
-    @Override
-    public Sessao criar(Sessao entidade) {
-
+    public void validar(Sessao entidade) {
         Sessao sessaoAntiga = sessaoRepository.sessaoAtiva(entidade.getHorario(), entidade.getSala().getId());
 
         if (sessaoAntiga != null) {
@@ -39,13 +33,21 @@ public class SessaoService extends CrudService<Sessao, Long> {
             LocalDate dataInicio = entidade.getDataInicio();
             entidade.setDataFinal(dataInicio.plusDays(7));
         }
-
-        Sessao saved = repository.save(entidade);
-
-        return porId(saved.getId());
+    }
+    @Override
+    protected void editarEntidade(Sessao entidade, Sessao recuperado) {
+        recuperado.setId(entidade.getId());
+        recuperado.setSala(entidade.getSala());
+        recuperado.setHorario(entidade.getHorario());
+        recuperado.setDataInicio(entidade.getDataInicio());
+        recuperado.setDataFinal(entidade.getDataFinal());
+        recuperado.setAtivo(entidade.getAtivo());
+        recuperado.setFilme(entidade.getFilme());
+        recuperado.setTipo(entidade.getTipo());
+        recuperado.setTotal(entidade.getTotal());
+        recuperado.setOcupadas(entidade.getOcupadas());
     }
 
-    @Override
     public List<Sessao> findByInterval(String de, String ate) {
         List<Sessao> sessoes = sessaoRepository.procurarSessaoPorIntervalo(LocalDate.parse(de), LocalDate.parse(ate));
         filtrarBilhetes(sessoes, LocalDate.parse(de), LocalDate.parse(ate));

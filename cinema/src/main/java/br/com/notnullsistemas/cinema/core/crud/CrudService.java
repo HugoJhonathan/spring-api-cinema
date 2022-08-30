@@ -1,5 +1,6 @@
 package br.com.notnullsistemas.cinema.core.crud;
 
+import br.com.notnullsistemas.cinema.core.exception.CinemaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,30 +20,30 @@ public abstract class CrudService<T, ID> {
         return repository.findAll();
     }
 
-    public T porId(ID id){
+    public T porId(ID id) throws Exception {
         return repository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("ID: "+id+" não existe")
+                        new CinemaException("ID: "+id+" não existe")
                 );
     }
 
-    public T criar(T entidade){
+    public T criar(T entidade) throws Exception {
+        validar(entidade);
         return repository.save(entidade);
     }
 
-    public T editar(ID id, T entidade){
+    protected abstract void validar(T entidade) throws Exception;
+
+    public T editar(ID id, T entidade) throws Exception {
         var recuperado = porId(id);
-
-        var entidadeSalvar = editarEntidade(recuperado, entidade);
-
-        return repository.save(entidadeSalvar);
+        validar(entidade);
+        editarEntidade(entidade, recuperado);
+        return repository.save(recuperado);
     }
-    protected abstract T editarEntidade(T recuperado, T entidade);
+    protected abstract void editarEntidade(T entidade, T recuperado);
 
     public void excluir(ID id){
         repository.deleteById(id);
     }
-
-    public abstract List<T> findByInterval(String de, String ate);
 
 }

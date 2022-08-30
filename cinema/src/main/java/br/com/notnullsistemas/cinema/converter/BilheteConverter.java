@@ -42,7 +42,7 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
     }
 
     @Override
-    public Bilhete dtoParaEntidade(BilheteDTO dto) {
+    public Bilhete dtoParaEntidade(BilheteDTO dto) throws Exception {
 
         Pessoa pessoa = pessoaService.porId(dto.getPessoaId());
         Sessao sessao = sessaoService.porId(dto.getSessaoId());

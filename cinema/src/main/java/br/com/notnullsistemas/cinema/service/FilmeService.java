@@ -2,21 +2,33 @@ package br.com.notnullsistemas.cinema.service;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
 import br.com.notnullsistemas.cinema.domain.Filme;
+import br.com.notnullsistemas.cinema.repository.FilmeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class FilmeService extends CrudService<Filme, Long> {
+
+    @Autowired
+    private FilmeRepository filmeRepository;
+
     @Override
-    protected Filme editarEntidade(Filme recuperado, Filme entidade) {
-        return null;
+    protected void validar(Filme entidade) {
+        boolean filmeExiste = filmeRepository.existsByNome(entidade.getNome());
+        if(filmeExiste){
+            throw new RuntimeException("Filme já cadastrado.");
+        }
     }
 
     @Override
-    public List<Filme> findByInterval(String de, String ate) {
-        return null;
+    protected void editarEntidade(Filme entidade, Filme recuperado) {
+        recuperado.setId(entidade.getId());
+        recuperado.setNome(entidade.getNome());
+        recuperado.setDuracao(entidade.getDuracao());
+        recuperado.setGeneros(entidade.getGeneros());
+        recuperado.setDiretor(entidade.getDiretor());
+        recuperado.setSinopse(entidade.getSinopse());
+        recuperado.setAtores(entidade.getAtores());
     }
-
 
 }

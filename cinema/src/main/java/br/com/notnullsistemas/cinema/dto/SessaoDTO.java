@@ -19,7 +19,7 @@ public class SessaoDTO implements Serializable {
     private LocalTime horario;
     @NotNull
     private LocalDate dataInicio;
-    @NotNull
+
     private LocalDate dataFinal;
     private Double total;
     private Boolean ativo;

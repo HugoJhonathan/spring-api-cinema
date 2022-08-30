@@ -1,13 +1,13 @@
 package br.com.notnullsistemas.cinema.service;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
+import br.com.notnullsistemas.cinema.core.exception.CinemaException;
 import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PessoaService extends CrudService<Pessoa, Long> {
@@ -16,29 +16,19 @@ public class PessoaService extends CrudService<Pessoa, Long> {
     PessoaRepository pessoaRepository;
 
     @Override
-    protected Pessoa editarEntidade(Pessoa recuperado, Pessoa entidade) {
-        return null;
+    protected void validar(Pessoa entidade) {
+//        boolean pessoaExiste = pessoaRepository.existsByCpf(entidade.getCpf());
+
+        Optional<Pessoa> pessoa = pessoaRepository.findByCpf(entidade.getCpf());
+        if(pessoa.isPresent() && !pessoa.get().getId().equals(entidade.getId())){
+            throw new CinemaException("Pessoa já cadastrada!");
+        }
     }
 
     @Override
-    public List<Pessoa> findByInterval(String de, String ate) {
-        return null;
-    }
-
-
-    @Override
-    public Pessoa criar(Pessoa pessoa){
-
-        Pessoa pessoaR = findByCpf(pessoa.getCpf());
-
-        if(Objects.isNull(pessoaR)){
-            return repository.save(pessoa);
-        }
-        else if(!pessoa.getNome().equals(pessoaR.getNome())){
-            throw new RuntimeException("Nome inválido!");
-        }
-
-        return pessoaR;
+    protected void editarEntidade(Pessoa entidade, Pessoa recuperado) {
+        recuperado.setNome(entidade.getNome());
+        recuperado.setCpf(entidade.getCpf());
     }
 
     public Pessoa findByCpf(String cpf){

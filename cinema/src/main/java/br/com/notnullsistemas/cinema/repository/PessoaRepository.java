@@ -19,4 +19,5 @@ public interface PessoaRepository extends CrudRepository<Pessoa, Long> {
     Optional<Pessoa> findByCpf(String cpf);
 
 
+    boolean existsByCpf(String cpf);
 }

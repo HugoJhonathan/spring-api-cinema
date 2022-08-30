@@ -8,13 +8,10 @@ import br.com.notnullsistemas.cinema.repository.FilmeRepository;
 import br.com.notnullsistemas.cinema.service.BilheteService;
 import br.com.notnullsistemas.cinema.service.FilmeService;
 import br.com.notnullsistemas.cinema.service.SessaoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -42,7 +39,7 @@ public class BilheteController extends CrudController<Bilhete, BilheteDTO, Long>
                 ate = de;
             }
 
-            List<BilheteDTO> entidades = service.findByInterval(de, ate)
+            List<BilheteDTO> entidades = bilheteService.findByInterval(de, ate)
                     .stream()
                     .map(converter::entidadeParaDto)
                     .collect(Collectors.toList());
@@ -92,7 +89,7 @@ public class BilheteController extends CrudController<Bilhete, BilheteDTO, Long>
     @GetMapping("/sessao/{id}")
     public ResponseEntity<List<BilheteDTO>> bilhetesPorSessao(@PathVariable("id") Long id,
             @RequestParam(value = "de", required = false) String de,
-            @RequestParam(value = "ate", required = false) String ate) {
+            @RequestParam(value = "ate", required = false) String ate) throws Exception {
         Sessao sessao = sessaoService.porId(id);
 
         List<Bilhete> listaBilhetes = bilheteService.bilhetesPorSessao(sessao, de, ate);
