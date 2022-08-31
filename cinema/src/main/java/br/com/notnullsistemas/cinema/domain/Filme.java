@@ -25,5 +25,7 @@ public class Filme implements Serializable, CrudDomain<Long>{
     @Column(unique=true)
     private String sinopse;
     private String atores;
+    private String posterUrl;
+    private String bannerUrl;
 
 }

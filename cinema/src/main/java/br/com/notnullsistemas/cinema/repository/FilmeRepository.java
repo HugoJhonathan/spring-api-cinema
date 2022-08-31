@@ -15,5 +15,9 @@ public interface FilmeRepository extends CrudRepository<Filme, Long> {
     @Query(value = "FROM Sessao s JOIN s.filme f WHERE f.id = :id")
     List<Sessao> sessoesPorFilme(@Param("id") Long id);
 
+//    @Query(value = "FROM Sessao s JOIN s.filme f WHERE f.id = :id")
+//    List<Filme> filmesAtivos();
+
+
     boolean existsByNome(String nome);
 }

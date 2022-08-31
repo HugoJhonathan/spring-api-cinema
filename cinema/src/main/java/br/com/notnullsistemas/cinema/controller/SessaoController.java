@@ -1,8 +1,11 @@
 package br.com.notnullsistemas.cinema.controller;
 
+import br.com.notnullsistemas.cinema.converter.FilmeConverter;
+import br.com.notnullsistemas.cinema.converter.SessaoMinConverter;
 import br.com.notnullsistemas.cinema.core.crud.CrudController;
 import br.com.notnullsistemas.cinema.domain.Bilhete;
 import br.com.notnullsistemas.cinema.domain.Sessao;
+import br.com.notnullsistemas.cinema.dto.FilmeComSessoesDTO;
 import br.com.notnullsistemas.cinema.dto.SessaoDTO;
 import br.com.notnullsistemas.cinema.repository.BilheteRepository;
 import br.com.notnullsistemas.cinema.repository.SessaoRepository;
@@ -12,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +32,38 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
 
     @Autowired
     private SessaoService sessaoService;
+
+    @Autowired
+    private SessaoMinConverter sessaoMinConverter;
+
+    @Autowired
+    private FilmeConverter filmeConverter;
+
+    @GetMapping("/ativas")
+    public ResponseEntity<Set<FilmeComSessoesDTO>> listarTodasSessoesAtivas() {
+
+        var sessoes = sessaoRepository.todasSessoesAtivas();
+
+        Set<FilmeComSessoesDTO> listFilmeComSessao = new HashSet<>();
+
+        sessoes.stream().forEach(el -> {
+            var filmeComSessaoDTO = new FilmeComSessoesDTO();
+            filmeComSessaoDTO.setFilme(filmeConverter.entidadeParaDto(el.getFilme()));
+            listFilmeComSessao.add(filmeComSessaoDTO);
+        });
+
+        sessoes.stream().forEach(s -> {
+            listFilmeComSessao.stream().forEach(listFilme -> {
+                if(listFilme.getFilme().getId().equals(s.getFilme().getId())){
+                    listFilme.getSessaoAtiva().add(sessaoMinConverter.entidadeParaDto(s));
+                }
+            });
+        });
+
+        var sessoesD = sessoes.stream().map(converter::entidadeParaDto).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listFilmeComSessao);
+    }
 
     @GetMapping("/{id}/{dia}")
     public ResponseEntity<SessaoDTO> sessaoDeUmDia(@PathVariable("id") Long id, @PathVariable("dia") String dia) throws Exception {

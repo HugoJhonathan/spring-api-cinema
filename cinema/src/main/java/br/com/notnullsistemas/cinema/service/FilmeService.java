@@ -29,6 +29,8 @@ public class FilmeService extends CrudService<Filme, Long> {
         recuperado.setDiretor(entidade.getDiretor());
         recuperado.setSinopse(entidade.getSinopse());
         recuperado.setAtores(entidade.getAtores());
+        recuperado.setBannerUrl(entidade.getBannerUrl());
+        recuperado.setPosterUrl(entidade.getPosterUrl());
     }
 
 }

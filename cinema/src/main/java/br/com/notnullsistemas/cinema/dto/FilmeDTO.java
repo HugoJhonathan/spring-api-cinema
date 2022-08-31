@@ -25,4 +25,6 @@ public class FilmeDTO implements Serializable {
     private String sinopse;
     @NotBlank
     private String atores;
+    private String posterUrl;
+    private String bannerUrl;
 }

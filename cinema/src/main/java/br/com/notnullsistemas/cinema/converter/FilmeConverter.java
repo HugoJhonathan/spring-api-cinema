@@ -18,6 +18,8 @@ public class FilmeConverter implements CrudConverter<Filme, FilmeDTO> {
         filme.setDiretor(entidade.getDiretor());
         filme.setSinopse(entidade.getSinopse());
         filme.setAtores(entidade.getAtores());
+        filme.setBannerUrl(entidade.getBannerUrl());
+        filme.setPosterUrl(entidade.getPosterUrl());
 
         return filme;
     }
@@ -31,6 +33,8 @@ public class FilmeConverter implements CrudConverter<Filme, FilmeDTO> {
         filme.setDiretor(dto.getDiretor());
         filme.setSinopse(dto.getSinopse());
         filme.setAtores(dto.getAtores());
+        filme.setBannerUrl(dto.getBannerUrl());
+        filme.setPosterUrl(dto.getPosterUrl());
 
         return filme;
     }
