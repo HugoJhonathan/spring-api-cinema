@@ -1,6 +1,7 @@
 package br.com.notnullsistemas.cinema.service;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
+import br.com.notnullsistemas.cinema.core.exception.CinemaException;
 import br.com.notnullsistemas.cinema.domain.Filme;
 import br.com.notnullsistemas.cinema.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class FilmeService extends CrudService<Filme, Long> {
     protected void validar(Filme entidade) {
         boolean filmeExiste = filmeRepository.existsByNome(entidade.getNome());
         if(filmeExiste){
-            throw new RuntimeException("Filme já cadastrado.");
+            throw new CinemaException("Filme já cadastrado.");
         }
     }
 

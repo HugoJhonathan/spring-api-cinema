@@ -1,11 +1,13 @@
 package br.com.notnullsistemas.cinema.controller;
 
 import br.com.notnullsistemas.cinema.converter.FilmeConverter;
+import br.com.notnullsistemas.cinema.converter.SalaConverter;
 import br.com.notnullsistemas.cinema.converter.SessaoMinConverter;
 import br.com.notnullsistemas.cinema.core.crud.CrudController;
 import br.com.notnullsistemas.cinema.domain.Bilhete;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.dto.FilmeComSessoesDTO;
+import br.com.notnullsistemas.cinema.dto.SalaComSessoesDTO;
 import br.com.notnullsistemas.cinema.dto.SessaoDTO;
 import br.com.notnullsistemas.cinema.repository.BilheteRepository;
 import br.com.notnullsistemas.cinema.repository.SessaoRepository;
@@ -39,6 +41,9 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
     @Autowired
     private FilmeConverter filmeConverter;
 
+    @Autowired
+    private SalaConverter salaConverter;
+
     @GetMapping("/ativas")
     public ResponseEntity<Set<FilmeComSessoesDTO>> listarTodasSessoesAtivas() {
 
@@ -55,12 +60,22 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
         sessoes.stream().forEach(s -> {
             listFilmeComSessao.stream().forEach(listFilme -> {
                 if(listFilme.getFilme().getId().equals(s.getFilme().getId())){
-                    listFilme.getSessaoAtiva().add(sessaoMinConverter.entidadeParaDto(s));
+                    var salaComSessoes = new SalaComSessoesDTO();
+                    salaComSessoes.setSala(salaConverter.entidadeParaDto(s.getSala()));
+                    listFilme.getSalasAtivas().add(salaComSessoes);
                 }
             });
         });
 
-        var sessoesD = sessoes.stream().map(converter::entidadeParaDto).collect(Collectors.toList());
+        sessoes.stream().forEach(s -> {
+            listFilmeComSessao.stream().forEach(listFilme -> {
+                listFilme.getSalasAtivas().stream().forEach(sala -> {
+                    if(sala.getSala().getId() == s.getSala().getId()){
+                        sala.getSessoes().add(sessaoMinConverter.entidadeParaDto(s));
+                    }
+                });
+            });
+        });
 
         return ResponseEntity.ok(listFilmeComSessao);
     }

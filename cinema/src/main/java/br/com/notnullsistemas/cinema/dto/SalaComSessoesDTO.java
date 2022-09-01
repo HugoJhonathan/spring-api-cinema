@@ -6,14 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class FilmeComSessoesDTO implements Serializable {
-    private FilmeDTO filme;
+public class SalaComSessoesDTO implements Serializable {
+
+    private SalaDTO sala;
     @JsonIgnoreProperties("filme")
-    private Set<SalaComSessoesDTO> salasAtivas = new HashSet<>();
+    private List<SessaoMinDTO> sessoes = new ArrayList<>();
+
 }

@@ -4,6 +4,196 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
+    <changeSet id="1" author=""><!-- FILMES -->
+        <preConditions onFailMessage="Tabela Filmes já existe!">
+            <not>
+                <tableExists tableName="filmes"/>
+            </not>
+        </preConditions>
+        <createTable tableName="filmes">
+            <column name="id" type="${bigint}" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_filme" nullable="false"/>
+            </column>
+            <column name="atores" type="${string}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="banner_url" type="${string}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="diretor" type="${string}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="duracao" type="${int}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="generos" type="${string}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nome" type="${string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="poster_url" type="${string}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sinopse" type="${text}">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="filmes" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+    </changeSet>
 
 
+    <changeSet id="2" author=""><!-- SALAS -->
+        <preConditions onFailMessage="Tabela Sala já existe!">
+            <not>
+                <tableExists tableName="salas"/>
+            </not>
+        </preConditions>
+        <createTable tableName="salas">
+            <column name="id" type="${bigint}" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_salas" nullable="false"/>
+            </column>
+            <column name="nome" type="${string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capacidade" type="${int}">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="salas" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+
+    <changeSet id="3" author=""><!-- TIPOS -->
+        <preConditions onFailMessage="Tabela Tipos já existe!">
+            <not>
+                <tableExists tableName="tipos"/>
+            </not>
+        </preConditions>
+        <createTable tableName="tipos">
+            <column name="id" type="${bigint}" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_tipos" nullable="false"/>
+            </column>
+            <column name="nome" type="${string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="preco" type="${double}">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="tipos" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+
+    <changeSet id="4" author=""><!-- PESSOAS -->
+        <preConditions onFailMessage="Tabela Pessoas já existe!">
+            <not>
+                <tableExists tableName="pessoas"/>
+            </not>
+        </preConditions>
+        <createTable tableName="pessoas">
+            <column name="id" type="${bigint}" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_pessoas" nullable="false"/>
+            </column>
+            <column name="nome" type="${string}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cpf" type="${string}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="pessoas" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+
+    <changeSet id="5" author=""><!-- SESSOES -->
+        <preConditions onFailMessage="Tabela Sessoes já existe!">
+            <not>
+                <tableExists tableName="sessoes"/>
+            </not>
+        </preConditions>
+        <createTable tableName="sessoes">
+            <column name="id" type="${bigint}" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_sessao" nullable="false"/>
+            </column>
+            <column name="ativo" type="${boolean}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_inicio" type="${date}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_final" type="${date}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="horario" type="${time}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="filme_id" type="${bigint}">
+                <constraints
+                        foreignKeyName="fk_filme_sessao"
+                        referencedTableName="filmes"
+                        referencedColumnNames="id"/>
+            </column>
+            <column name="sala_id" type="${bigint}">
+                <constraints
+                        foreignKeyName="fk_sala_sessao"
+                        referencedTableName="salas"
+                        referencedColumnNames="id"/>
+            </column>
+            <column name="tipo_id" type="${bigint}">
+                <constraints
+                        foreignKeyName="fk_tipo_sessao"
+                        referencedTableName="tipos"
+                        referencedColumnNames="id"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="sessoes" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+
+    <changeSet id="6" author=""><!-- BILHETES -->
+        <preConditions onFailMessage="Tabela Bilhetes já existe!">
+            <not>
+                <tableExists tableName="bilhetes"/>
+            </not>
+        </preConditions>
+        <createTable tableName="bilhetes">
+            <column name="id" type="${bigint}" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_bilhete" nullable="false"/>
+            </column>
+            <column name="data_compra" type="${date}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="dia_sessao" type="${date}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meia" type="${boolean}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="poltrona" type="${int}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total" type="${double}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pessoa_id" type="${bigint}">
+                <constraints
+                        foreignKeyName="fk_pessoa_bilhete"
+                        referencedTableName="pessoas"
+                        referencedColumnNames="id"/>
+            </column>
+            <column name="sessao_id" type="${bigint}">
+                <constraints
+                        foreignKeyName="fk_sessao_bilhete"
+                        referencedTableName="sessoes"
+                        referencedColumnNames="id"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="bilhetes" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+
+    <changeSet id="777" author="">
+        <sqlFile path="import.sql" stripComments="true" />
+    </changeSet>
 </databaseChangeLog>

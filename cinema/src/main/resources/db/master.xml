@@ -4,5 +4,14 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
+    <property name="int" value="java.sql.Types.INTEGER" dbms="mariadb, mysql, postgresql"/>
+    <property name="bigint" value="java.sql.Types.BIGINT" dbms="mariadb, mysql, postgresql"/>
+    <property name="double" value="java.sql.Types.DOUBLE" dbms="mariadb, mysql, postgresql"/>
+    <property name="string" value="java.sql.Types.VARCHAR(255)" dbms="mariadb, mysql, postgresql"/>
+    <property name="text" value="java.sql.Types.LONGVARCHAR" dbms="mariadb, mysql, postgresql"/>
+    <property name="date" value="java.sql.Types.DATE" dbms="mariadb, mysql, postgresql"/>
+    <property name="boolean" value="java.sql.Types.BOOLEAN" dbms="mariadb, mysql, postgresql"/>
+    <property name="time" value="java.sql.Types.TIME" dbms="mariadb, mysql, postgresql"/>
+
     <includeAll path="changelog" relativeToChangelogFile="true"></includeAll>
 </databaseChangeLog>

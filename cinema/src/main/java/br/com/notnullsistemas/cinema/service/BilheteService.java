@@ -1,6 +1,7 @@
 package br.com.notnullsistemas.cinema.service;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
+import br.com.notnullsistemas.cinema.core.exception.CinemaException;
 import br.com.notnullsistemas.cinema.domain.Bilhete;
 import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.domain.Sessao;
@@ -33,13 +34,13 @@ public class BilheteService extends CrudService<Bilhete, Long> {
         entidade.setPessoa(pessoa);
 
         if (entidade.getPoltrona() <= 0 || entidade.getPoltrona() > sessao.getSala().getCapacidade()) {
-            throw new RuntimeException("Cadeira invalida");
+            throw new CinemaException("Cadeira invalida");
         }
 
         for (Bilhete bilhete : sessao.getBilhetes()) {
             if (bilhete.getPoltrona() == entidade.getPoltrona()
                     && bilhete.getDiaSessao().equals(entidade.getDiaSessao())) {
-                throw new RuntimeException("A Poltrona " + entidade.getPoltrona()
+                throw new CinemaException("A Poltrona " + entidade.getPoltrona()
                         + " não está disponível para essa Sessão do dia "
                         + entidade.getDiaSessao());
             }
