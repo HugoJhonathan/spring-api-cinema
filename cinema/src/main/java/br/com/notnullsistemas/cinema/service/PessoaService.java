@@ -21,7 +21,7 @@ public class PessoaService extends CrudService<Pessoa, Long> {
 
         Optional<Pessoa> pessoa = pessoaRepository.findByCpf(entidade.getCpf());
         if(pessoa.isPresent() && !pessoa.get().getId().equals(entidade.getId())){
-            throw new CinemaException("Pessoa já cadastrada!");
+            throw new CinemaException(pessoa.get().getId().toString());
         }
     }
 

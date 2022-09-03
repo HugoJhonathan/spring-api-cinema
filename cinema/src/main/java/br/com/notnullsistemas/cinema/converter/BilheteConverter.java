@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Component
 @AllArgsConstructor
@@ -33,7 +34,7 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
         bilhete.setTotal(entidade.getTotal());
         bilhete.setDataCompra(entidade.getDataCompra());
         bilhete.setDiaSessao(entidade.getDiaSessao());
-        bilhete.setPessoaId(entidade.getPessoa().getId());
+        bilhete.setPessoa(pessoaConverter.entidadeParaDto(entidade.getPessoa()));
         bilhete.setSessaoId(entidade.getSessao().getId());
         bilhete.setSessao(sessaoMinConverter.entidadeParaDto(entidade.getSessao()));
         bilhete.setHorarioSessao(entidade.getSessao().getHorario());
@@ -44,11 +45,15 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
     @Override
     public Bilhete dtoParaEntidade(BilheteDTO dto) throws Exception {
 
-        Pessoa pessoa = pessoaService.porId(dto.getPessoaId());
+//        Pessoa pessoa = pessoaService.porId(dto.getPessoaId());
         Sessao sessao = sessaoService.porId(dto.getSessaoId());
 
-        Date agora = new Date();
-        dto.setDataCompra(agora);
+        Pessoa pessoa = pessoaService.findByCpf(dto.getPessoa().getCpf());
+        if (Objects.isNull(pessoa)) {
+            pessoa = pessoaService.criar(pessoaConverter.dtoParaEntidade(dto.getPessoa()));
+        }
+
+        dto.setDataCompra(new Date());
 
         Bilhete bilhete = new Bilhete();
         bilhete.setPessoa(pessoa);

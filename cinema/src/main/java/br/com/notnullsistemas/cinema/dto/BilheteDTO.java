@@ -30,7 +30,7 @@ public class BilheteDTO implements Serializable {
     private LocalTime horarioSessao;
 
     @NotNull
-    private Long pessoaId;
+    private PessoaDTO pessoa;
     @NotNull
     private Long sessaoId;
     private SessaoMinDTO sessao;
