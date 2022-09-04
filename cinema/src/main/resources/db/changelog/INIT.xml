@@ -39,7 +39,7 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-        <addAutoIncrement tableName="filmes" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+        <addAutoIncrement tableName="filmes" columnName="id" columnDataType="${bigint}" incrementBy="1" startWith="1"/>
     </changeSet>
 
 
@@ -60,7 +60,7 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-        <addAutoIncrement tableName="salas" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+        <addAutoIncrement tableName="salas" columnName="id" columnDataType="${bigint}" incrementBy="1" startWith="1"/>
     </changeSet>
 
 
@@ -81,7 +81,7 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-        <addAutoIncrement tableName="tipos" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+        <addAutoIncrement tableName="tipos" columnName="id" columnDataType="${bigint}" incrementBy="1" startWith="1"/>
     </changeSet>
 
 
@@ -102,7 +102,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addAutoIncrement tableName="pessoas" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+        <addAutoIncrement tableName="pessoas" columnName="id" columnDataType="${bigint}" incrementBy="1" startWith="1"/>
     </changeSet>
 
 
@@ -147,7 +147,7 @@
                         referencedColumnNames="id"/>
             </column>
         </createTable>
-        <addAutoIncrement tableName="sessoes" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+        <addAutoIncrement tableName="sessoes" columnName="id" columnDataType="${bigint}" incrementBy="1" startWith="1"/>
     </changeSet>
 
 
@@ -189,7 +189,7 @@
                         referencedColumnNames="id"/>
             </column>
         </createTable>
-        <addAutoIncrement tableName="bilhetes" columnName="id" columnDataType="bigint" incrementBy="1" startWith="1"/>
+        <addAutoIncrement tableName="bilhetes" columnName="id" columnDataType="${bigint}" incrementBy="1" startWith="1"/>
     </changeSet>
 
 
