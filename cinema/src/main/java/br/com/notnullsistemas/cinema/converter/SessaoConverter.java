@@ -56,9 +56,17 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
         sessao.setDataFinal(dto.getDataFinal());
         sessao.setAtivo(dto.getAtivo());
 
-        sessao.setFilme(filmeService.porId(dto.getFilmeId()));
-        sessao.setSala(salaService.porId(dto.getSalaId()));
-        sessao.setTipo(tipoService.porId(dto.getTipoId()));
+        if(dto.getSalaId() != null){
+            sessao.setSala(salaService.porId(dto.getSalaId()));
+        }
+        if(dto.getFilmeId() != null){
+            sessao.setFilme(filmeService.porId(dto.getFilmeId()));
+        }
+        if(dto.getTipoId() != null){
+            sessao.setTipo(tipoService.porId(dto.getTipoId()));
+        }
+
+
         return sessao;
     }
 }

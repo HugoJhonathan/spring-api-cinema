@@ -21,33 +21,27 @@ public class SessaoService extends CrudService<Sessao, Long> {
 
     @Override
     public void validar(Sessao entidade) {
-//        Sessao sessaoAntiga = sessaoRepository.sessaoAtiva(entidade.getHorario(), entidade.getSala().getId());
-//
-//        if (sessaoAntiga != null) {
-//            sessaoAntiga.setAtivo(false);
-//            repository.save(sessaoAntiga);
-//        }
-//        LocalDate dataFinal = entidade.getDataFinal();
-//
-//        if (Objects.isNull(dataFinal)) {
-//            LocalDate dataInicio = entidade.getDataInicio();
-//            entidade.setDataFinal(dataInicio.plusDays(7));
-//        }
+
+        if (entidade.getSala() != null) {
+            Sessao sessaoAntiga = sessaoRepository.sessaoAtiva(entidade.getHorario(), entidade.getSala().getId());
+
+            if (sessaoAntiga != null) {
+                sessaoAntiga.setAtivo(false);
+                repository.save(sessaoAntiga);
+            }
+        }
+        LocalDate dataFinal = entidade.getDataFinal();
+//        entidade.setAtivo(true);
+
+        if (Objects.isNull(dataFinal) && entidade.getDataInicio() != null) {
+            LocalDate dataInicio = entidade.getDataInicio();
+            entidade.setDataFinal(dataInicio.plusDays(7));
+        }
     }
+
     @Override
     protected void editarEntidade(Sessao entidade, Sessao recuperado) {
         recuperado.setAtivo(entidade.getAtivo());
-//        recuperado.setDataFinal(entidade.getDataFinal());
-//        recuperado.setId(entidade.getId());
-//        recuperado.setSala(entidade.getSala());
-//        recuperado.setHorario(entidade.getHorario());
-//        recuperado.setDataInicio(entidade.getDataInicio());
-//
-//
-//        recuperado.setFilme(entidade.getFilme());
-//        recuperado.setTipo(entidade.getTipo());
-//        recuperado.setTotal(entidade.getTotal());
-//        recuperado.setOcupadas(entidade.getOcupadas());
     }
 
     public List<Sessao> findByInterval(String de, String ate) {
@@ -55,7 +49,6 @@ public class SessaoService extends CrudService<Sessao, Long> {
         filtrarBilhetes(sessoes, LocalDate.parse(de), LocalDate.parse(ate));
         return sessoes;
     }
-
 
 
     private void filtrarBilhetes(List<Sessao> sessoes, LocalDate de_, LocalDate ate_) {
@@ -71,7 +64,7 @@ public class SessaoService extends CrudService<Sessao, Long> {
         });
     }
 
-    public List<Sessao> listarTodos(String horario, String de, String ate){
+    public List<Sessao> listarTodos(String horario, String de, String ate) {
         if (!Objects.isNull(de)) {
 
             if (Objects.isNull(ate)) {

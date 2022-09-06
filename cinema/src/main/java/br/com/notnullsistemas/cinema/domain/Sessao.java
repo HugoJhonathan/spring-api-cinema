@@ -32,7 +32,7 @@ public class Sessao implements Serializable, CrudDomain<Long> {
     private LocalDate dataInicio;
     private LocalDate dataFinal;
 
-    private Boolean ativo = true;
+    private Boolean ativo;
 
     @ManyToOne
     @JsonIgnoreProperties("sessoes")

@@ -17,6 +17,7 @@ public class FilmeService extends CrudService<Filme, Long> {
 
     @Override
     protected void validar(Filme entidade) {
+
         Optional<Filme> filme = filmeRepository.findByNome(entidade.getNome());
 
         if(filme.isPresent() && !filme.get().getId().equals(entidade.getId())){
