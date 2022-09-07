@@ -47,7 +47,7 @@ public class BilheteController extends CrudController<Bilhete, BilheteDTO, Long>
             return ResponseEntity.ok(entidades);
         }
 
-        var ListaDto = service.listar()
+        var ListaDto = bilheteService.listar()
                 .stream()
                 .map(converter::entidadeParaDto)
                 .collect(Collectors.toList());

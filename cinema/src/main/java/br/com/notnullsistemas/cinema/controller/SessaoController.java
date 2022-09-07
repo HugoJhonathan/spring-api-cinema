@@ -51,13 +51,13 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
 
         Set<FilmeComSessoesDTO> listFilmeComSessao = new HashSet<>();
 
-        sessoes.stream().forEach(el -> {
+        sessoes.stream().forEach(el -> { // filtra os Filmes
             var filmeComSessaoDTO = new FilmeComSessoesDTO();
             filmeComSessaoDTO.setFilme(filmeConverter.entidadeParaDto(el.getFilme()));
             listFilmeComSessao.add(filmeComSessaoDTO);
         });
 
-        sessoes.stream().forEach(s -> {
+        sessoes.stream().forEach(s -> { // filtra as Salas desse Filme
             listFilmeComSessao.stream().forEach(listFilme -> {
                 if(listFilme.getFilme().getId().equals(s.getFilme().getId())){
                     var salaComSessoes = new SalaComSessoesDTO();
@@ -70,7 +70,7 @@ public class SessaoController extends CrudController<Sessao, SessaoDTO, Long> {
         sessoes.stream().forEach(s -> {
             listFilmeComSessao.stream().forEach(listFilme -> {
                 listFilme.getSalasAtivas().stream().forEach(sala -> {
-                    if(sala.getSala().getId() == s.getSala().getId()){
+                    if(sala.getSala().getId() == s.getSala().getId() && (listFilme.getFilme().getId().equals(s.getFilme().getId()))){
                         sala.getSessoes().add(sessaoMinConverter.entidadeParaDto(s));
                     }
                 });

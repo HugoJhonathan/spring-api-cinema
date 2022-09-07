@@ -17,6 +17,7 @@ public class PessoaConverter implements CrudConverter<Pessoa, PessoaDTO> {
     public Pessoa dtoParaEntidade(PessoaDTO dto) {
 
         Pessoa pessoa = new Pessoa();
+        pessoa.setId(dto.getId());
         pessoa.setNome(dto.getNome());
         pessoa.setCpf(dto.getCpf());
 

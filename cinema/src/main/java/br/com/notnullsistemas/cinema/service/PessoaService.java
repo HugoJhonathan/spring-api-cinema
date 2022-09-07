@@ -17,11 +17,9 @@ public class PessoaService extends CrudService<Pessoa, Long> {
 
     @Override
     protected void validar(Pessoa entidade) {
-//        boolean pessoaExiste = pessoaRepository.existsByCpf(entidade.getCpf());
-
         Optional<Pessoa> pessoa = pessoaRepository.findByCpf(entidade.getCpf());
         if(pessoa.isPresent() && !pessoa.get().getId().equals(entidade.getId())){
-            throw new CinemaException(pessoa.get().getId().toString());
+            throw new CinemaException("Já existe uma Pessoa cadastrada com esse CPF!");
         }
     }
 

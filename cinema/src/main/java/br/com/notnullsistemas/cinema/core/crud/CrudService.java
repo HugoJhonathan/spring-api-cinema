@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public abstract class CrudService<T, ID> {
+public abstract class CrudService<T extends CrudDomain<ID>, ID> {
 
     @Autowired
     protected CrudRepository<T, ID> repository;

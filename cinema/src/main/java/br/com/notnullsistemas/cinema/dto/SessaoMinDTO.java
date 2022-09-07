@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +16,6 @@ public class SessaoMinDTO implements Serializable {
     private LocalTime horario;
     private LocalDate dataInicio;
     private LocalDate dataFinal;
-    private Double total;
     private Boolean ativo;
     private SalaDTO sala;
     private FilmeDTO filme;

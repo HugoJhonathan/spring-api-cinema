@@ -19,11 +19,12 @@ public class FilmeService extends CrudService<Filme, Long> {
         if(filmeExiste){
             throw new CinemaException("Filme já cadastrado.");
         }
+
     }
 
     @Override
     protected void editarEntidade(Filme entidade, Filme recuperado) {
-        recuperado.setId(entidade.getId());
+
         recuperado.setNome(entidade.getNome());
         recuperado.setDuracao(entidade.getDuracao());
         recuperado.setGeneros(entidade.getGeneros());

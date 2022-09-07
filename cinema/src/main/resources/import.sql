@@ -23,7 +23,7 @@ insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_i
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "22:00:00", 1, 1, 1, true);
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "13:00:00", 2, 5, 2, true);
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "16:00:00", 2, 5, 2, true);
-insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "20:00:00", 2, 5, 2, true);
+insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "20:00:00", 2, 3, 2, true);
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "16:00:00", 3, 3, 2, true);
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "18:00:00", 3, 2, 2, true);
 insert into sessoes (data_inicio, data_final, horario, filme_id, sala_id, tipo_id, ativo) values ("2022-09-01", "2022-09-10", "20:00:00", 3, 2, 2, true);
@@ -45,3 +45,7 @@ insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) v
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (10, 4, false, 11, "2022-08-19", 20);
 insert into bilhetes (sessao_id, pessoa_id, meia, poltrona, dia_sessao, total) values (9, 5, false, 11, "2022-08-19", 20);
 
+
+--insert into pedidos (data) values ("2022-01-01")
+--insert into itens_compra (meia, preco, bilhete_id, pedido_id) values (true, 20, 1, 1)
+--insert into itens_compra (meia, preco, bilhete_id, pedido_id) values (false, 40, 1, 1)

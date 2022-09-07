@@ -1,14 +1,13 @@
 package br.com.notnullsistemas.cinema.converter;
 
-import org.springframework.stereotype.Component;
-
 import br.com.notnullsistemas.cinema.core.crud.CrudConverter;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.dto.SessaoDTO;
-import br.com.notnullsistemas.cinema.repository.FilmeRepository;
-import br.com.notnullsistemas.cinema.repository.SalaRepository;
-import br.com.notnullsistemas.cinema.repository.TipoRepository;
+import br.com.notnullsistemas.cinema.service.FilmeService;
+import br.com.notnullsistemas.cinema.service.SalaService;
+import br.com.notnullsistemas.cinema.service.TipoService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
@@ -21,9 +20,9 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
     private final TipoConverter tipoConverter;
     private final BilheteMinConverter bilheteMinConverter;
 
-    private final FilmeRepository filmeRepository;
-    private final SalaRepository salaRepository;
-    private final TipoRepository tipoRepository;
+    private final FilmeService filmeService;
+    private final SalaService salaService;
+    private final TipoService tipoService;
 
     @Override
     public SessaoDTO entidadeParaDto(Sessao entidade) {
@@ -41,21 +40,24 @@ public class SessaoConverter implements CrudConverter<Sessao, SessaoDTO> {
                 .stream().map(bilheteMinConverter::entidadeParaDto)
                 .collect(Collectors.toList()));
         dto.setOcupadas(entidade.getOcupadas());
+        dto.setFilmeId(entidade.getFilme().getId());
+        dto.setSalaId(entidade.getSala().getId());
+        dto.setTipoId(entidade.getTipo().getId());
 
         return dto;
     }
 
     @Override
-    public Sessao dtoParaEntidade(SessaoDTO dto) {
+    public Sessao dtoParaEntidade(SessaoDTO dto) throws Exception {
         var sessao = new Sessao();
         sessao.setId(dto.getId());
         sessao.setHorario(dto.getHorario());
         sessao.setDataInicio(dto.getDataInicio());
         sessao.setDataFinal(dto.getDataFinal());
 
-        sessao.setFilme(filmeRepository.findById(dto.getFilmeId()).orElse(null));
-        sessao.setSala(salaRepository.findById(dto.getSalaId()).orElse(null));
-        sessao.setTipo(tipoRepository.findById(dto.getTipoId()).orElse(null));
+        sessao.setFilme(filmeService.porId(dto.getFilmeId()));
+        sessao.setSala(salaService.porId(dto.getSalaId()));
+        sessao.setTipo(tipoService.porId(dto.getTipoId()));
         return sessao;
     }
 }

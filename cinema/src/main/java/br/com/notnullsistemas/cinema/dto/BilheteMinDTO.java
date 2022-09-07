@@ -21,8 +21,8 @@ public class BilheteMinDTO implements Serializable {
     private Date dataCompra;
     private LocalDate diaSessao;
     private LocalTime horarioSessao;
-    private PessoaDTO pessoa;
-    private Long pessoaId;
+//    private PessoaDTO pessoa;
+//    private Long pessoaId;
     private Long sessaoId;
 
 }

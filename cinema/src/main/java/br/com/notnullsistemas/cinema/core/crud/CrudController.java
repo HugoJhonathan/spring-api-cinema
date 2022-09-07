@@ -24,9 +24,10 @@ public abstract class CrudController<T extends CrudDomain<ID>, D, ID> extends Re
     public ResponseEntity<D> editar(@RequestBody D dto, @PathVariable("id") ID id) throws Exception {
 
         var novaEntidade = converter.dtoParaEntidade(dto);
+        novaEntidade.setId(id);
+
         var salvo = service.editar(id, novaEntidade);
         var salvoDto = converter.entidadeParaDto(salvo);
-
         return ResponseEntity.ok(salvoDto);
     }
 

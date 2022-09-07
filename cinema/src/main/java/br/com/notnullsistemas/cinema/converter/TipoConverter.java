@@ -11,11 +11,13 @@ public class TipoConverter implements CrudConverter<Tipo, TipoDTO> {
 
     @Override
     public TipoDTO entidadeParaDto(Tipo entidade) {
+
         return new TipoDTO(entidade.getId(), entidade.getNome(), entidade.getPreco());
     }
 
     @Override
     public Tipo dtoParaEntidade(TipoDTO dto) {
+
         return new Tipo(dto.getId(), dto.getNome(), dto.getPreco());
     }
 }

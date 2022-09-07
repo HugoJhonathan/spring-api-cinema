@@ -2,7 +2,6 @@ package br.com.notnullsistemas.cinema.converter;
 
 import br.com.notnullsistemas.cinema.core.crud.CrudConverter;
 import br.com.notnullsistemas.cinema.domain.Bilhete;
-import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.dto.BilheteDTO;
 import br.com.notnullsistemas.cinema.repository.PessoaRepository;
@@ -12,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.Objects;
 
 @Component
 @AllArgsConstructor
@@ -34,7 +32,6 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
         bilhete.setTotal(entidade.getTotal());
         bilhete.setDataCompra(entidade.getDataCompra());
         bilhete.setDiaSessao(entidade.getDiaSessao());
-        bilhete.setPessoa(pessoaConverter.entidadeParaDto(entidade.getPessoa()));
         bilhete.setSessaoId(entidade.getSessao().getId());
         bilhete.setSessao(sessaoMinConverter.entidadeParaDto(entidade.getSessao()));
         bilhete.setHorarioSessao(entidade.getSessao().getHorario());
@@ -44,19 +41,9 @@ public class BilheteConverter implements CrudConverter<Bilhete, BilheteDTO> {
 
     @Override
     public Bilhete dtoParaEntidade(BilheteDTO dto) throws Exception {
-
-//        Pessoa pessoa = pessoaService.porId(dto.getPessoaId());
         Sessao sessao = sessaoService.porId(dto.getSessaoId());
-
-        Pessoa pessoa = pessoaService.findByCpf(dto.getPessoa().getCpf());
-        if (Objects.isNull(pessoa)) {
-            pessoa = pessoaService.criar(pessoaConverter.dtoParaEntidade(dto.getPessoa()));
-        }
-
         dto.setDataCompra(new Date());
-
         Bilhete bilhete = new Bilhete();
-        bilhete.setPessoa(pessoa);
         bilhete.setPoltrona(dto.getPoltrona());
         bilhete.setMeia(dto.getMeia());
         bilhete.setTotal(dto.getTotal());

@@ -15,7 +15,6 @@ import java.util.Date;
 @Data
 public class BilheteDTO implements Serializable {
 
-
     private Long id;
     @NotNull
     private Integer poltrona;
@@ -29,8 +28,8 @@ public class BilheteDTO implements Serializable {
     private LocalDate diaSessao;
     private LocalTime horarioSessao;
 
-    @NotNull
-    private PessoaDTO pessoa;
+//    @NotNull
+//    private PessoaDTO pessoa;
     @NotNull
     private Long sessaoId;
     private SessaoMinDTO sessao;

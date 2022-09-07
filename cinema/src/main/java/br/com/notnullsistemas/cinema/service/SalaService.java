@@ -7,22 +7,27 @@ import br.com.notnullsistemas.cinema.repository.SalaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SalaService extends CrudService<Sala, Long> {
 
     @Autowired
     private SalaRepository salaRepository;
+
     @Override
     protected void validar(Sala entidade) {
-        boolean salaExiste = salaRepository.existsByNome(entidade.getNome());
-        if(salaExiste){
-            throw new CinemaException("Sala já cadastrada.");
+
+        Optional<Sala> sala = salaRepository.findByNome(entidade.getNome());
+
+        if(sala.isPresent() && !sala.get().getId().equals(entidade.getId())){
+            throw new CinemaException("Já existe uma Sala cadastrada com esse nome!");
         }
     }
 
     @Override
     protected void editarEntidade(Sala entidade, Sala recuperado) {
-        recuperado.setId(entidade.getId());
+
         recuperado.setNome(entidade.getNome());
         recuperado.setCapacidade(entidade.getCapacidade());
     }

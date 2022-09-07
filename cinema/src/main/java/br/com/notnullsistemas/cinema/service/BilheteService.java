@@ -3,10 +3,8 @@ package br.com.notnullsistemas.cinema.service;
 import br.com.notnullsistemas.cinema.core.crud.CrudService;
 import br.com.notnullsistemas.cinema.core.exception.CinemaException;
 import br.com.notnullsistemas.cinema.domain.Bilhete;
-import br.com.notnullsistemas.cinema.domain.Pessoa;
 import br.com.notnullsistemas.cinema.domain.Sessao;
 import br.com.notnullsistemas.cinema.repository.BilheteRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +28,6 @@ public class BilheteService extends CrudService<Bilhete, Long> {
     @Override
     protected void validar(Bilhete entidade) throws Exception {
         Sessao sessao = sessaoService.porId(entidade.getSessao().getId());
-        Pessoa pessoa = pessoaService.porId(entidade.getPessoa().getId());
-        entidade.setPessoa(pessoa);
 
         if (entidade.getPoltrona() <= 0 || entidade.getPoltrona() > sessao.getSala().getCapacidade()) {
             throw new CinemaException("Cadeira invalida");
@@ -56,7 +52,6 @@ public class BilheteService extends CrudService<Bilhete, Long> {
     @Override
     protected void editarEntidade(Bilhete entidade, Bilhete recuperado) {
         recuperado.setId(entidade.getId());
-        recuperado.setPessoa(entidade.getPessoa());
         recuperado.setDataCompra(entidade.getDataCompra());
         recuperado.setDiaSessao(entidade.getDiaSessao());
         recuperado.setPoltrona(entidade.getPoltrona());
