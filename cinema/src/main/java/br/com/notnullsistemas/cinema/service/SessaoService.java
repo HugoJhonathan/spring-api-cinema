@@ -21,31 +21,33 @@ public class SessaoService extends CrudService<Sessao, Long> {
 
     @Override
     public void validar(Sessao entidade) {
-        Sessao sessaoAntiga = sessaoRepository.sessaoAtiva(entidade.getHorario(), entidade.getSala().getId());
-
-        if (sessaoAntiga != null) {
-            sessaoAntiga.setAtivo(false);
-            repository.save(sessaoAntiga);
-        }
-        LocalDate dataFinal = entidade.getDataFinal();
-
-        if (Objects.isNull(dataFinal)) {
-            LocalDate dataInicio = entidade.getDataInicio();
-            entidade.setDataFinal(dataInicio.plusDays(7));
-        }
+//        Sessao sessaoAntiga = sessaoRepository.sessaoAtiva(entidade.getHorario(), entidade.getSala().getId());
+//
+//        if (sessaoAntiga != null) {
+//            sessaoAntiga.setAtivo(false);
+//            repository.save(sessaoAntiga);
+//        }
+//        LocalDate dataFinal = entidade.getDataFinal();
+//
+//        if (Objects.isNull(dataFinal)) {
+//            LocalDate dataInicio = entidade.getDataInicio();
+//            entidade.setDataFinal(dataInicio.plusDays(7));
+//        }
     }
     @Override
     protected void editarEntidade(Sessao entidade, Sessao recuperado) {
-        recuperado.setId(entidade.getId());
-        recuperado.setSala(entidade.getSala());
-        recuperado.setHorario(entidade.getHorario());
-        recuperado.setDataInicio(entidade.getDataInicio());
-        recuperado.setDataFinal(entidade.getDataFinal());
         recuperado.setAtivo(entidade.getAtivo());
-        recuperado.setFilme(entidade.getFilme());
-        recuperado.setTipo(entidade.getTipo());
-        recuperado.setTotal(entidade.getTotal());
-        recuperado.setOcupadas(entidade.getOcupadas());
+//        recuperado.setDataFinal(entidade.getDataFinal());
+//        recuperado.setId(entidade.getId());
+//        recuperado.setSala(entidade.getSala());
+//        recuperado.setHorario(entidade.getHorario());
+//        recuperado.setDataInicio(entidade.getDataInicio());
+//
+//
+//        recuperado.setFilme(entidade.getFilme());
+//        recuperado.setTipo(entidade.getTipo());
+//        recuperado.setTotal(entidade.getTotal());
+//        recuperado.setOcupadas(entidade.getOcupadas());
     }
 
     public List<Sessao> findByInterval(String de, String ate) {

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FilmeRepository extends CrudRepository<Filme, Long> {
@@ -20,4 +21,6 @@ public interface FilmeRepository extends CrudRepository<Filme, Long> {
 
 
     boolean existsByNome(String nome);
+
+    Optional<Filme> findByNome(String nome);
 }

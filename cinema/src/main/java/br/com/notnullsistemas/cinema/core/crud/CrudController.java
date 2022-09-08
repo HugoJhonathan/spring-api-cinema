@@ -23,6 +23,7 @@ public abstract class CrudController<T extends CrudDomain<ID>, D, ID> extends Re
     @PutMapping("/{id}")
     public ResponseEntity<D> editar(@RequestBody D dto, @PathVariable("id") ID id) throws Exception {
 
+
         var novaEntidade = converter.dtoParaEntidade(dto);
         novaEntidade.setId(id);
 

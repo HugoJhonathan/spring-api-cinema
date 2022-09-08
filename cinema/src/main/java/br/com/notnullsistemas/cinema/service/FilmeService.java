@@ -7,6 +7,8 @@ import br.com.notnullsistemas.cinema.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class FilmeService extends CrudService<Filme, Long> {
 
@@ -15,9 +17,10 @@ public class FilmeService extends CrudService<Filme, Long> {
 
     @Override
     protected void validar(Filme entidade) {
-        boolean filmeExiste = filmeRepository.existsByNome(entidade.getNome());
-        if(filmeExiste){
-            throw new CinemaException("Filme já cadastrado.");
+        Optional<Filme> filme = filmeRepository.findByNome(entidade.getNome());
+
+        if(filme.isPresent() && !filme.get().getId().equals(entidade.getId())){
+            throw new CinemaException("Já existe um Filme cadastrado com esse nome!");
         }
 
     }

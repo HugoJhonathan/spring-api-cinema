@@ -1,10 +1,10 @@
 package br.com.notnullsistemas.cinema.dto;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,9 +19,10 @@ public class SessaoDTO implements Serializable {
     private LocalTime horario;
     @NotNull
     private LocalDate dataInicio;
-
+    @NotNull
     private LocalDate dataFinal;
     private Double total;
+    @NotNull
     private Boolean ativo;
     @NotNull
     private Long filmeId;
@@ -29,12 +30,12 @@ public class SessaoDTO implements Serializable {
     private Long salaId;
     @NotNull
     private Long tipoId;
+    @NotNull
     private SalaDTO sala;
+    @NotNull
     private FilmeDTO filme;
+    @NotNull
     private TipoDTO tipo;
     private List<BilheteMinDTO> bilhetes;
-
     private List<Integer> ocupadas;
-
-
 }
