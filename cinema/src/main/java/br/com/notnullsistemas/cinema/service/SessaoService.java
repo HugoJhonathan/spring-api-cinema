@@ -31,7 +31,7 @@ public class SessaoService extends CrudService<Sessao, Long> {
             }
         }
         LocalDate dataFinal = entidade.getDataFinal();
-//        entidade.setAtivo(true);
+        entidade.setAtivo(true);
 
         if (Objects.isNull(dataFinal) && entidade.getDataInicio() != null) {
             LocalDate dataInicio = entidade.getDataInicio();
